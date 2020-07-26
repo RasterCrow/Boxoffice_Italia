@@ -115,20 +115,20 @@ app.get('/boxoffice/movies', (req,res) => {
 
 app.get('/boxoffice/movies/:id', (req,res) => {
     let id = req.params.id
-    console.log(id)
+    //console.log(id)
     Movie_db.findById(id.toString())
       .then(async movie => {
-        console.log(movie)
         if(movie){
           let json_array=[]
           let movie_found=true
+          let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
           //retrieve movie data and also movie info from tmdb
           //make axios call to tmdb
           await axios.get(`https://api.themoviedb.org/3/search/movie?`, {
             params: {
               api_key: TMDB_API_KEY,
               language: 'it-IT',
-              query: movie.titolo,
+              query: titolo,
               //year:movie.
             }
           })
@@ -175,6 +175,22 @@ app.get('/boxoffice/dailyboxoffice', (req,res) => {
       })
 })
 
+app.get('/boxoffice/dailyboxoffice/:day', (req,res) => {
+  Dailyboxoffice_db.find({'giorno':req.params.day})
+    .then(daily_list => {
+      if(daily_list){
+
+        res.json(daily_list)
+      } else {
+        res.status(404).end()
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).end()
+    })
+})
+
 app.get('/boxoffice/dailyboxoffice/:id', (req,res) => {
 
     Dailyboxoffice_db.find({'movie' : req.params.id})
@@ -206,9 +222,25 @@ app.get('/boxoffice/weekendboxoffice', (req,res) => {
       })
 })
 
-app.get('/boxoffice/weekendboxoffice/:id', (req,res) => {
+app.get('/boxoffice/weekendboxoffice/:weekendStart', (req,res) => {
+  
+  Weekendboxoffice_db.find({'inizioWeekend':req.params.weekendStart})
+    .then(weekend_list => {
+      if(weekend_list){
+        console.log(weekend_list)
+        res.json(weekend_list)
+      } else {
+        res.status(404).end()
+      }
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(500).end()
+    })
+})
 
-    Weekendboxoffice_db.find({'movie' : req.params.titolo})
+app.get('/boxoffice/weekendboxoffice/:id', (req,res) => {
+    Weekendboxoffice_db.find({'movie' : req.params.id})
       .then(weekend_list => {
         if(weekend_list){
           res.json(weekend_list)

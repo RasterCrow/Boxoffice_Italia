@@ -1,0 +1,20 @@
+body {
+  height:100%;
+  margin: 0 !important;
+  font-family: 'Vollkorn', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,body {
+  background-color: black;
+}
+
+#root{
+  background-color: black;
+  color: white;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
