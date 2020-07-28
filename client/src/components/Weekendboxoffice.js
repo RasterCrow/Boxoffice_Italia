@@ -3,7 +3,7 @@ import BoxOfficeService from '../services/boxoffice.js'
 import Table from 'react-bootstrap/Table'
 
 import './BoxofficeList.css'
-import MovieTableTr from './MovieTableTr'
+import WeeklyMovie from './WeeklyMovie'
 
 function Weekendboxoffice (props) {
     const { weekend } = props;
@@ -32,12 +32,12 @@ function Weekendboxoffice (props) {
                       <th>Titolo</th>
                       <th>Incasso</th>
                       <th>Presenze</th>
-                      <th>Incasso ad oggi</th>
+                      <th>Weekend in classifica</th>
                     </tr>
                   </thead>
                   <tbody>
                     {weekendList.map(movie =>
-                        <MovieTableTr key={movie.movie} movie={movie}/>
+                        <WeeklyMovie key={movie.movie} movie={movie}/>
                     )}
                   </tbody>
                 </Table>  
