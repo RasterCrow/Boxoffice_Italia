@@ -14,49 +14,42 @@ function DailyMovie(props) {
   };
   useEffect(hook, []);
 
-  /*
 
-    <th>Posizione</th>
-                  <th>Titolo</th>
-                  <th>Incasso</th>
-                  <th>Presenze</th>
-                  <th>Incasso totale</th>
-                  <th>Presenze totali</th>
-                  */
   return (
     <>
       {movieInfo !== "" ? (
         <tr>
           <td>{props.movie.posizioneClassifica}</td>
           <td>{movieInfo.titolo}</td>
+          <td>{movieInfo.dataUscita != undefined ? ((("0" + new Date(movieInfo.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movieInfo.dataUscita).getMonth() + 1) + "-" + new Date(movieInfo.dataUscita).getFullYear()) : "Sconosciuto"}</td>
           <td>
             {props.movie.incasso.toLocaleString(
               undefined, // leave undefined to use the browser's locale,
               // or use a string like 'en-US' to override it.
-              { minimumFractionDigits: 2 }
+              { minimumFractionDigits: 0 }
             )}
           </td>
           <td>
             {props.movie.presenze.toLocaleString(
               undefined, // leave undefined to use the browser's locale,
               // or use a string like 'en-US' to override it.
-              { minimumFractionDigits: 2 }
+              { minimumFractionDigits: 0 }
             )}
           </td>
           <td>
             {props.movie.incassoTotaleAlGiorno.toLocaleString(
               undefined, // leave undefined to use the browser's locale,
               // or use a string like 'en-US' to override it.
-              { minimumFractionDigits: 2 }
+              { minimumFractionDigits: 0 }
             )}
           </td>
         </tr>
       ) : (
-        //maybe show loading icon
-        <tr>
-          <td>Loading movie...</td>
-        </tr>
-      )}
+          //maybe show loading icon
+          <tr>
+            <td>Loading movie...</td>
+          </tr>
+        )}
     </>
   );
 }

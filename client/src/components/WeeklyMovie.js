@@ -29,28 +29,30 @@ function WeeklyMovie(props) {
         <tr>
           <td>{props.movie.posizioneClassificaWeekend}</td>
           <td>{movieInfo.titolo}</td>
+          <td>{movieInfo.dataUscita != undefined ? ((("0" + new Date(movieInfo.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movieInfo.dataUscita).getMonth() + 1) + "-" + new Date(movieInfo.dataUscita).getFullYear()) : "Sconosciuto"}</td>
+
           <td>
             {parseInt(props.movie.incassoWeekend).toLocaleString(
               undefined, // leave undefined to use the browser's locale,
               // or use a string like 'en-US' to override it.
-              { minimumFractionDigits: 2 }
+              { minimumFractionDigits: 0 }
             )}
           </td>
           <td>
             {parseInt(props.movie.presenzeWeekend).toLocaleString(
               undefined, // leave undefined to use the browser's locale,
               // or use a string like 'en-US' to override it.
-              { minimumFractionDigits: 2 }
+              { minimumFractionDigits: 0 }
             )}
           </td>
           <td>{props.movie.weekendNumero}</td>
         </tr>
       ) : (
-        //maybe show loading icon
-        <tr>
-          <td>Loading movie...</td>
-        </tr>
-      )}
+          //maybe show loading icon
+          <tr>
+            <td>Loading movie...</td>
+          </tr>
+        )}
     </>
   );
 }

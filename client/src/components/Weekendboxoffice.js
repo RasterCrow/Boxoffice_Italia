@@ -33,6 +33,7 @@ function Weekendboxoffice(props) {
             <tr>
               <th>Posizione</th>
               <th>Titolo</th>
+              <th>Data Uscita</th>
               <th>Incasso</th>
               <th>Presenze</th>
               <th>Weekend in classifica</th>

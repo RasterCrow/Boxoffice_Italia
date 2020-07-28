@@ -35,11 +35,11 @@ mongoose
 const movieSchema = new mongoose.Schema({
   movieId: String,
   titolo: String,
-  dataUscita: String,
+  dataUscita: Date,
   paese: String,
   distribuzione: String,
-  incasso: String,
-  presenze: String,
+  incasso: Number,
+  presenze: Number,
 });
 
 movieSchema.set("toJSON", {
@@ -53,12 +53,12 @@ movieSchema.set("toJSON", {
 const weekendboxofficeSchema = new mongoose.Schema(
   {
     movie: String,
-    inizioWeekend: String,
-    fineWeekend: String,
-    weekendNumero: String,
-    posizioneClassificaWeekend: String,
-    presenzeWeekend: String,
-    incassoWeekend: String,
+    inizioWeekend: Date,
+    fineWeekend: Date,
+    weekendNumero: Number,
+    posizioneClassificaWeekend: Number,
+    presenzeWeekend: Number,
+    incassoWeekend: Number,
   },
   { collection: "weekendboxoffice" }
 );
@@ -73,12 +73,12 @@ weekendboxofficeSchema.set("toJSON", {
 
 const dailyboxofficeSchema = new mongoose.Schema(
   {
-    giorno: String,
+    giorno: Date,
     movie: String,
-    posizioneClassifica: String,
-    presenze: String,
-    incasso: String,
-    incassoTotaleAlGiorno: String,
+    posizioneClassifica: Number,
+    presenze: Number,
+    incasso: Number,
+    incassoTotaleAlGiorno: Number,
   },
   { collection: "dailyboxoffice" }
 );
@@ -103,6 +103,7 @@ const Weekendboxoffice_db = mongoose.model(
   weekendboxofficeSchema
 );
 
+
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -113,6 +114,7 @@ app.get("/boxoffice", (req, res) => {
   res.send("<h1>Hello BoxOffice!</h1>");
 });
 
+//retrieves all movie documents
 app.get("/boxoffice/movies", (req, res) => {
   Movie_db.find({})
     .then((movies_list) => {
@@ -128,10 +130,11 @@ app.get("/boxoffice/movies", (req, res) => {
     });
 });
 
+//retrieves movie by id
 app.get("/boxoffice/movies/:id", (req, res) => {
   let id = req.params.id;
   //console.log(id)
-  Movie_db.findById(id.toString())
+  Movie_db.findById(id)
     .then(async (movie) => {
       if (movie) {
         res.json(movie);
@@ -145,6 +148,7 @@ app.get("/boxoffice/movies/:id", (req, res) => {
     });
 });
 
+//retrieves data from tmdb. it has movie id, but it actually searches by name of that movie id
 app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
   let id = req.params.id;
   //console.log(id)
@@ -181,6 +185,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
     });
 });
 
+//retrieves all daily documents
 app.get("/boxoffice/dailyboxoffice", (req, res) => {
   console.log("chiamata a dailyBoxoffice/");
   Dailyboxoffice_db.find({})
@@ -197,8 +202,10 @@ app.get("/boxoffice/dailyboxoffice", (req, res) => {
     });
 });
 
+//retrieves by day
 app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
-  console.log("chiamata a dailyBoxoffice/:day");
+  //console.log("chiamata a dailyBoxoffice/:day");
+
   Dailyboxoffice_db.find({ giorno: req.params.day })
     .then((daily_list) => {
       if (daily_list) {
@@ -213,6 +220,8 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
     });
 });
 
+
+//retrieves by movie id
 app.get("/boxoffice/dailyboxoffice/:id", (req, res) => {
   Dailyboxoffice_db.find({ movie: req.params.id })
     .then((daily_list) => {
@@ -228,6 +237,7 @@ app.get("/boxoffice/dailyboxoffice/:id", (req, res) => {
     });
 });
 
+//retrieves all wekeend documents
 app.get("/boxoffice/weekendboxoffice", (req, res) => {
   Weekendboxoffice_db.find({})
     .then((weekend_list) => {
@@ -243,11 +253,13 @@ app.get("/boxoffice/weekendboxoffice", (req, res) => {
     });
 });
 
-app.get("/boxoffice/weekendboxoffice/:weekendStart", (req, res) => {
-  Weekendboxoffice_db.find({ inizioWeekend: req.params.weekendStart })
+
+//retrieves all wekeend by weekend date
+app.get("/boxoffice/weekendboxoffice/:weekend", (req, res) => {
+  //console.log("chiamata a /boxoffice/weekendboxoffice/:weekend")
+  Weekendboxoffice_db.find({ inizioWeekend: req.params.weekend })
     .then((weekend_list) => {
       if (weekend_list) {
-        //console.log(weekend_list)
         res.json(weekend_list);
       } else {
         res.status(404).end();
@@ -259,6 +271,7 @@ app.get("/boxoffice/weekendboxoffice/:weekendStart", (req, res) => {
     });
 });
 
+//retrieves weekend box office by id of movie
 app.get("/boxoffice/weekendboxoffice/:id", (req, res) => {
   Weekendboxoffice_db.find({ movie: req.params.id })
     .then((weekend_list) => {
@@ -274,6 +287,47 @@ app.get("/boxoffice/weekendboxoffice/:id", (req, res) => {
     });
 });
 
+
+//retrieves yearly box office by year
+app.get("/boxoffice/yearlyboxoffice/:year", (req, res) => {
+  console.log("chiamata a /boxoffice/yearlyboxoffice/:year")
+  start_date = req.params.year + "-01-01"
+  end_date = req.params.year + "-12-31"
+  Movie_db.find({ dataUscita: { $gte: start_date, $lte: end_date } }).sort({ incasso: -1 }).limit(10)
+    .then((yearly_list) => {
+
+      if (yearly_list) {
+        res.json(yearly_list);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).end();
+    });
+});
+
+
+//retrieves all time box office
+app.get("/boxoffice/alltime", (req, res) => {
+  console.log("chiamata a /boxoffice/alltime")
+
+  Movie_db.find().sort({ incasso: -1 }).limit(10)
+    .then((all_time_list) => {
+      if (all_time_list) {
+        res.json(all_time_list);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).end();
+    });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+

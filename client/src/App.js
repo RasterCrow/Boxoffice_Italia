@@ -6,6 +6,8 @@ import Row from "react-bootstrap/Row";
 
 import Weekendboxoffice from "./components/Weekendboxoffice";
 import Dailyboxoffice from "./components/Dailyboxoffice";
+import Yearlyboxoffice from "./components/Yearlyboxoffice";
+import AllTimeboxoffice from "./components/AllTimeboxoffice";
 import MyNavbar from "./components/Navbar";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
@@ -18,7 +20,8 @@ function App() {
   date.setDate(date.getDate() - 1);
   let month = ("0" + (date.getMonth() + 1)).slice(-2);
   let giorno = ("0" + date.getDate()).slice(-2);
-  let date_format = date.getFullYear() + "-" + month + "-" + giorno;
+  let full_year = date.getFullYear();
+  let date_format = full_year + "-" + month + "-" + giorno;
 
   //LAST WEEKEND DATE
   var diff =
@@ -34,6 +37,8 @@ function App() {
   const [day, setDay] = useState(date_format);
   //weekend sarebbe il giorno di inizio dell-weekend che voglio cercare
   const [weekend, setWeekend] = useState(weekend_date_format);
+  //weekend sarebbe il giorno di inizio dell-weekend che voglio cercare
+  const [year, setYear] = useState(full_year);
 
   const handleButtonPrecedente = (event) => {
     //if its the button for day update day, else update weekend
@@ -49,7 +54,7 @@ function App() {
         "-" +
         yesterday_giorno;
       setDay(yesterday_date_format);
-    } else {
+    } else if (event.target.value === "weekend") {
       let last_weekend = new Date(weekend);
       var diff =
         last_weekend.getDate() -
@@ -65,6 +70,8 @@ function App() {
         "-" +
         last_weekend_giorno;
       setWeekend(last_weekend_date_format);
+    } else if (event.target.value === "year") {
+      setYear(year - 1);
     }
     event.preventDefault();
   };
@@ -88,7 +95,7 @@ function App() {
           tomorrow.getFullYear() + "-" + tomorrow_month + "-" + tomorrow_giorno;
         setDay(tomorrow_date_format);
       }
-    } else {
+    } else if (event.target.value === "weekend") {
       let next_weekend = new Date(weekend);
       //check if its today
       if (
@@ -117,6 +124,11 @@ function App() {
           next_weekend_giorno;
         setWeekend(next_weekend_date_format);
       }
+    } else if (event.target.value === "year") {
+      if (year != full_year) {
+        setYear(year + 1);
+      } else {
+      }
     }
 
     event.preventDefault();
@@ -139,9 +151,15 @@ function App() {
               Precedente
             </Button>
             <h1 id="titolo_list">Incasso del giorno {day}</h1>
-            <Button value="day" onClick={handleButtonSuccessivo}>
-              Successivo
-            </Button>
+            {day == date_format ? (
+              <Button value="day" onClick={handleButtonSuccessivo} disabled>
+                Successivo
+              </Button>
+            ) : (
+              <Button value="day" onClick={handleButtonSuccessivo}>
+                Successivo
+              </Button>
+            )}
           </Row>
           <Dailyboxoffice day={day} />
         </Route>
@@ -151,17 +169,41 @@ function App() {
               Precedente
             </Button>
             <h1 id="titolo_list"> Incasso del weekend {weekend} </h1>
-            <Button value="weekend" onClick={handleButtonSuccessivo}>
-              Successivo
-            </Button>
+            {weekend == weekend_date_format ? (
+              <Button value="weekend" onClick={handleButtonSuccessivo} disabled>
+                Successivo
+              </Button>
+            ) : (
+              <Button value="weekend" onClick={handleButtonSuccessivo}>
+                Successivo
+              </Button>
+            )}
           </Row>
           <Weekendboxoffice weekend={weekend} />
         </Route>
         <Route path="/yearly">
-          <h1> yearly</h1>
+          <Row id="buttonRow">
+            <Button value="year" onClick={handleButtonPrecedente}>
+              Precedente
+            </Button>
+            <h1 id="titolo_list"> Incasso dell'anno {year} </h1>
+            {year == full_year ? (
+              <Button value="year" onClick={handleButtonSuccessivo} disabled>
+                Successivo
+              </Button>
+            ) : (
+              <Button value="year" onClick={handleButtonSuccessivo}>
+                Successivo
+              </Button>
+            )}
+          </Row>
+          <Yearlyboxoffice year={year} />
         </Route>
         <Route path="/all-time">
-          <h1> all-time</h1>
+          <Row id="buttonRow">
+            <h1 id="titolo_list"> Maggiori incassi di sempre </h1>
+          </Row>
+          <AllTimeboxoffice />
         </Route>
         <Route path="/">
           <h1> Home</h1>

@@ -5,10 +5,10 @@ import DailyMovie from "./DailyMovie";
 import "./BoxofficeList.css";
 function Dailyboxoffice(props) {
   const [dailyList, setDailyList] = useState([]);
-
+  const { day } = props;
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    BoxOfficeService.getDailyBoxOfficeList(props.day).then((list) => {
+    BoxOfficeService.getDailyBoxOfficeList(day).then((list) => {
       setDailyList(list);
     });
   };
@@ -30,6 +30,7 @@ function Dailyboxoffice(props) {
             <tr>
               <th>Posizione</th>
               <th>Titolo</th>
+              <th>Data Uscita</th>
               <th>Incasso</th>
               <th>Presenze</th>
               <th>Incasso ad oggi</th>
@@ -42,8 +43,8 @@ function Dailyboxoffice(props) {
           </tbody>
         </Table>
       ) : (
-        <h2>Non ho trovato dati per questo giorno</h2>
-      )}
+          <h2>Non ho trovato dati per questo giorno</h2>
+        )}
     </>
   );
 }
