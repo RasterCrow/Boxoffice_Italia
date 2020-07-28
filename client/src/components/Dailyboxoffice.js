@@ -8,22 +8,13 @@ function Dailyboxoffice(props) {
 
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    //console.log(props.day);
     BoxOfficeService.getDailyBoxOfficeList(props.day).then((list) => {
       setDailyList(list);
-      //console.log(list)
     });
   };
 
-  //useEffect(hook, []);
+  useEffect(hook, [props.day]);
 
-  useEffect(() => {
-    console.log(props.day);
-    BoxOfficeService.getDailyBoxOfficeList(props.day).then((list) => {
-      setDailyList(list);
-      //console.log(list)
-    });
-  });
   return (
     <>
       {dailyList.length > 0 ? (
@@ -51,7 +42,7 @@ function Dailyboxoffice(props) {
           </tbody>
         </Table>
       ) : (
-        <h2>Non ho trovato dati per questo weekend</h2>
+        <h2>Non ho trovato dati per questo giorno</h2>
       )}
     </>
   );
