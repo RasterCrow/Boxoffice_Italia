@@ -119,7 +119,24 @@ app.get('/boxoffice/movies/:id', (req,res) => {
     Movie_db.findById(id.toString())
       .then(async movie => {
         if(movie){
-          let json_array=[]
+            res.json(movie)
+        } else {
+          res.status(404).end()
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        res.status(500).end()
+      })
+    
+})
+
+app.get('/boxoffice/movies/tmdb/:id', (req,res) => {
+    let id = req.params.id
+    //console.log(id)
+    Movie_db.findById(id.toString())
+      .then(async movie => {
+        if(movie){
           let movie_found=true
           let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
           //retrieve movie data and also movie info from tmdb
@@ -134,21 +151,11 @@ app.get('/boxoffice/movies/:id', (req,res) => {
           })
           .then(axios_res =>{
             //I'll need to check that only one movie gets returned, maybe
-            movie_found=true
-            json_array.push(axios_res.data.results[0])
+            res.json(axios_res)
           })
           .catch(error => {
-            movie_found=false
             console.log(error)
           })
-          //join both jsons in array and return that.
-          if(movie_found){
-            //console.log("movie found")
-            json_array.push(movie)
-            res.send(json_array)
-          }else{
-            res.json(movie)
-          }
         } else {
           res.status(404).end()
         }

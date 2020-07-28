@@ -5,9 +5,20 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: 0 !important;
-    text-align: center;
+    text-align: start;
     transition: all 0.5s ease;
     color: rgba(255, 255, 255);
     -webkit-text-stroke: 1px rgb(0, 0, 0);
     text-shadow: 2px 2px #000000;
+}
+
+#title {
+    margin-left: 10px;
+    margin-top:100px;
+    font-size: 4em;
+}
+
+#title Image{
+    transform: scale(0.5)
+    
 }

@@ -1,0 +1,12 @@
+#tabellaDaily{
+    margin-top: 50px !important;
+    margin-bottom:50px !important;
+    margin: auto;
+    max-width: 80%;
+}
+
+#titolo_list{
+    margin-top: 30px !important;
+    margin:auto;
+    text-align:center
+}

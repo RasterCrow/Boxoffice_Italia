@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import BoxOfficeService from '../services/boxoffice.js'
-
-import Movie_boxoffice from './Movie_boxoffice'
+import Table from 'react-bootstrap/Table'
+import MovieTableTr from './MovieTableTr'
+import './BoxofficeList.css'
 function Dailyboxoffice (props) {
     const [dailyList, setDailyList] = useState([])
     
@@ -18,12 +19,28 @@ function Dailyboxoffice (props) {
   
     return (
         <>
-            <h1 style={{textAlign:"center"}}>Incasso del giorno {props.day}</h1>
-            {dailyList.length > 0 ?
-                dailyList.map(movie =>
-                    <Movie_boxoffice key={movie.movie} movie={movie}/>
-                ) : <h2>Non ho trovato dati per oggi</h2>
-            } 
+            <h1 id='titolo_list'>Incasso del giorno {props.day}</h1>
+            
+              {dailyList.length > 0 ? (
+                <Table id ='tabellaDaily' striped bordered hover responsive="md" variant="dark">
+                  <thead>
+                    <tr>
+                      <th>Posizione</th>
+                      <th>Titolo</th>
+                      <th>Incasso</th>
+                      <th>Presenze</th>
+                      <th>Incasso ad oggi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {dailyList.map(movie =>
+                      <MovieTableTr key={movie.movie} movie={movie}/>
+                  )}
+                  </tbody>
+                </Table>  
+                  ): <h2>Non ho trovato dati per questo weekend</h2>
+              }
+              
         </>
     )
   }

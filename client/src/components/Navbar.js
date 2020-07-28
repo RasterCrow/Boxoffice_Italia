@@ -1,11 +1,11 @@
-import React,{ useState, useEffect } from 'react'
+import React from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-
+import Image from 'react-bootstrap/Image'
 import './Navbar.css';
 
 function MyNavbar (props){
@@ -13,10 +13,10 @@ function MyNavbar (props){
     return (
         <>
         <Jumbotron className="jumbo" fluid>
-            <h1>BoxOffice Italia</h1>
+            <h1 id="title">BoxOffice Italia</h1>
         </Jumbotron>
             <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="/">BoxOffice</Navbar.Brand>
+                <Navbar.Brand href="/"><Image src="./assets/home_icon_black.svg"/></Navbar.Brand>
                 <Nav 
                     className="mr-auto" 
                     activeKey={location.pathname}
