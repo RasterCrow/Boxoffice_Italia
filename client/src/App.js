@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router";
 import Button from "react-bootstrap/Button";
@@ -9,6 +9,7 @@ import Dailyboxoffice from "./components/Dailyboxoffice";
 import Yearlyboxoffice from "./components/Yearlyboxoffice";
 import AllTimeboxoffice from "./components/AllTimeboxoffice";
 import MyNavbar from "./components/Navbar";
+import MovieInfo from "./components/MovieInfo";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
 
@@ -125,7 +126,7 @@ function App() {
         setWeekend(next_weekend_date_format);
       }
     } else if (event.target.value === "year") {
-      if (year != full_year) {
+      if (year !== full_year) {
         setYear(year + 1);
       } else {
       }
@@ -145,13 +146,13 @@ function App() {
      */}
       <MyNavbarWithRouter />
       <Switch>
-        <Route path="/daily">
-          <Row id="buttonRow">
+        <Route exact path="/daily">
+          <Row id="buttonRow" fluid>
             <Button value="day" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
             <h1 id="titolo_list">Incasso del giorno {day}</h1>
-            {day == date_format ? (
+            {day === date_format ? (
               <Button value="day" onClick={handleButtonSuccessivo} disabled>
                 Successivo
               </Button>
@@ -163,13 +164,13 @@ function App() {
           </Row>
           <Dailyboxoffice day={day} />
         </Route>
-        <Route path="/weekly">
-          <Row id="buttonRow">
+        <Route exact path="/weekly">
+          <Row id="buttonRow" fluid>
             <Button value="weekend" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
             <h1 id="titolo_list"> Incasso del weekend {weekend} </h1>
-            {weekend == weekend_date_format ? (
+            {weekend === weekend_date_format ? (
               <Button value="weekend" onClick={handleButtonSuccessivo} disabled>
                 Successivo
               </Button>
@@ -181,13 +182,13 @@ function App() {
           </Row>
           <Weekendboxoffice weekend={weekend} />
         </Route>
-        <Route path="/yearly">
+        <Route exact path="/yearly">
           <Row id="buttonRow">
             <Button value="year" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
             <h1 id="titolo_list"> Incasso dell'anno {year} </h1>
-            {year == full_year ? (
+            {year === full_year ? (
               <Button value="year" onClick={handleButtonSuccessivo} disabled>
                 Successivo
               </Button>
@@ -199,15 +200,17 @@ function App() {
           </Row>
           <Yearlyboxoffice year={year} />
         </Route>
-        <Route path="/all-time">
+        <Route exact path="/all-time">
           <Row id="buttonRow">
             <h1 id="titolo_list"> Maggiori incassi di sempre </h1>
           </Row>
           <AllTimeboxoffice />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <h1> Home</h1>
         </Route>
+
+        <Route path="/movie/:id" component={MovieInfo}></Route>
       </Switch>
     </Router>
   );

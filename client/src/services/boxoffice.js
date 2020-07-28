@@ -32,6 +32,11 @@ const getMovieInfo = (id) => {
 
     return request.then(response => response.data)
 }
+const getMovieInfoTMDB = (id) => {
+    const request = axios.get(`${baseUrl}/movies/tmdb/${id}`)
+
+    return request.then(response => response.data)
+}
 
 
 const getAllTimeBoxOfficeList = () => {
@@ -39,6 +44,7 @@ const getAllTimeBoxOfficeList = () => {
 
     return request.then(response => response.data)
 }
+
 const deletePerson = (id) => {
     const request = axios.delete(`${baseUrl}/${id}`)
     return request
@@ -57,5 +63,6 @@ export default {
     getWeekendBoxOfficeList,
     getMovieInfo,
     getYearlyBoxOfficeList,
-    getAllTimeBoxOfficeList
+    getAllTimeBoxOfficeList,
+    getMovieInfoTMDB
 }

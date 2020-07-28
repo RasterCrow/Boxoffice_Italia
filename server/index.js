@@ -170,7 +170,8 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
           })
           .then((axios_res) => {
             //I'll need to check that only one movie gets returned, maybe
-            res.json(axios_res);
+
+            res.json(axios_res.data.results[0]);
           })
           .catch((error) => {
             console.log(error);

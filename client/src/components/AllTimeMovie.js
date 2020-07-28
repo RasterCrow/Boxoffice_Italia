@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import BoxOfficeService from "../services/boxoffice.js";
+import React from "react";
+import { withRouter } from 'react-router'
+import { useHistory } from "react-router-dom";
 
 function AllTimeMovie({ movie, posizione }) {
+    const history = useHistory();
     return (
         <>
             {movie !== "" ? (
-                <tr>
+                <tr onClick={(event) => history.push(`/movie/${movie.id}`)}>
                     <td>{posizione}</td>
                     <td>{movie.titolo}</td>
-                    <td>{movie.dataUscita != undefined ? ((("0" + new Date(movie.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movie.dataUscita).getMonth() + 1) + "-" + new Date(movie.dataUscita).getFullYear()) : "Sconosciuto"}</td>
+                    <td>{movie.dataUscita !== undefined ? ((("0" + new Date(movie.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movie.dataUscita).getMonth() + 1) + "-" + new Date(movie.dataUscita).getFullYear()) : "Sconosciuto"}</td>
 
                     <td>
                         {movie.incasso.toLocaleString(
@@ -36,4 +38,4 @@ function AllTimeMovie({ movie, posizione }) {
     );
 }
 
-export default AllTimeMovie;
+export default withRouter(AllTimeMovie);

@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-import BoxOfficeService from "../services/boxoffice.js";
+import React from "react";
+import { withRouter } from 'react-router'
+import { useHistory } from "react-router-dom";
 
 function YearlyMovie({ movie, posizione }) {
     //console.log(props)
+    const history = useHistory();
 
     return (
         <>
             {movie !== "" ? (
-                <tr>
+                <tr onClick={(event) => history.push(`/movie/${movie.id}`)}>
                     <td>{posizione}</td>
                     <td>{movie.titolo}</td>
-                    <td>{movie.dataUscita != undefined ? ((("0" + new Date(movie.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movie.dataUscita).getMonth() + 1) + "-" + new Date(movie.dataUscita).getFullYear()) : "Sconosciuto"}</td>
+                    <td>{movie.dataUscita !== undefined ? ((("0" + new Date(movie.dataUscita).getDay()).slice(-2)) + "-" + (new Date(movie.dataUscita).getMonth() + 1) + "-" + new Date(movie.dataUscita).getFullYear()) : "Sconosciuto"}</td>
 
                     <td>
                         {movie.incasso.toLocaleString(
@@ -33,9 +35,10 @@ function YearlyMovie({ movie, posizione }) {
                     <tr>
                         <td>Loading movie...</td>
                     </tr>
-                )}
+                )
+            }
         </>
     );
 }
 
-export default YearlyMovie;
+export default withRouter(YearlyMovie);
