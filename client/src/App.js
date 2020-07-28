@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Weekendboxoffice from "./components/Weekendboxoffice";
 import Dailyboxoffice from "./components/Dailyboxoffice";
 import MyNavbar from "./components/Navbar";
+import MovieInfo from "./components/MovieInfo";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
 
@@ -134,7 +135,7 @@ function App() {
       <MyNavbarWithRouter />
       <Switch>
         <Route path="/daily">
-          <Row id="buttonRow">
+          <Row id="buttonRow" fluid>
             <Button value="day" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
@@ -146,7 +147,7 @@ function App() {
           <Dailyboxoffice day={day} />
         </Route>
         <Route path="/weekly">
-          <Row id="buttonRow">
+          <Row id="buttonRow" fluid>
             <Button value="weekend" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
@@ -166,6 +167,8 @@ function App() {
         <Route path="/">
           <h1> Home</h1>
         </Route>
+
+        <Route exact path="/movie/:id" component={MovieInfo}></Route>
       </Switch>
     </Router>
   );
