@@ -164,13 +164,14 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
             params: {
               api_key: TMDB_API_KEY,
               language: "it-IT",
-              query: titolo,
+              query: titolo
               //year:movie.
             },
           })
           .then((axios_res) => {
-            //I'll need to check that only one movie gets returned, maybe
-
+            //sort the result by popularity
+            axios_res.data.results.sort(GetSortOrder("popularity"));
+            //returns the most popular one
             res.json(axios_res.data.results[0]);
           })
           .catch((error) => {
@@ -186,6 +187,16 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
     });
 });
 
+function GetSortOrder(prop) {
+  return function (a, b) {
+    if (a[prop] < b[prop]) {
+      return 1;
+    } else if (a[prop] > b[prop]) {
+      return -1;
+    }
+    return 0;
+  }
+}
 //retrieves all daily documents
 app.get("/boxoffice/dailyboxoffice", (req, res) => {
   console.log("chiamata a dailyBoxoffice/");
@@ -227,6 +238,7 @@ app.get("/boxoffice/dailyboxoffice/:id", (req, res) => {
   Dailyboxoffice_db.find({ movie: req.params.id })
     .then((daily_list) => {
       if (daily_list) {
+        console.log(daily_list)
         res.json(daily_list);
       } else {
         res.status(404).end();

@@ -3,7 +3,7 @@ import BoxOfficeService from "../services/boxoffice.js";
 import Table from "react-bootstrap/Table";
 
 import "./BoxofficeList.css";
-import WeeklyMovie from "./WeeklyMovie";
+import TableMovie from "./TableMovie";
 
 function Weekendboxoffice(props) {
   const { weekend } = props;
@@ -41,13 +41,15 @@ function Weekendboxoffice(props) {
           </thead>
           <tbody>
             {weekendList.map((movie) => (
-              <WeeklyMovie key={movie.movie} movie={movie} />
+              <TableMovie key={movie.movie} movieProps={movie} tableType="weekend" />
             ))}
           </tbody>
         </Table>
       ) : (
-        <h2>Non ho trovato dati per oggi</h2>
-      )}
+          <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+            Non ho trovato dati per questo giorno
+          </h1>
+        )}
     </>
   );
 }

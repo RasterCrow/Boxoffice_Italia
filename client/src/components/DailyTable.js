@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from "react";
 import BoxOfficeService from "../services/boxoffice.js";
 import Table from "react-bootstrap/Table";
-import DailyMovie from "./DailyMovie";
+import Image from "react-bootstrap/Image";
+
+
+import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
+
 function Dailyboxoffice(props) {
-  const [dailyList, setDailyList] = useState([]);
   const { day } = props;
+
+  const [dailyList, setDailyList] = useState([]);
+  const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
+
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    BoxOfficeService.getDailyBoxOfficeList(day).then((list) => {
+    setFetchedDataComplete(false);
+    BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
       setDailyList(list);
     });
   };
@@ -17,7 +25,9 @@ function Dailyboxoffice(props) {
 
   return (
     <>
-      {dailyList.length > 0 ? (
+      {fetchedDataComplete ? (
+        <Image src="/assets/loading_icon.svg" style={{ margin: "auto" }} />
+      ) : dailyList.length > 0 ? (
         <Table
           id="tabellaDaily"
           striped
@@ -38,13 +48,15 @@ function Dailyboxoffice(props) {
           </thead>
           <tbody>
             {dailyList.map((movie) => (
-              <DailyMovie key={movie.movie} movie={movie} />
+              <TableMovie key={movie.movie} movieProps={movie} tableType="day" />
             ))}
           </tbody>
         </Table>
       ) : (
-          <h2>Non ho trovato dati per questo giorno</h2>
-        )}
+            <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+              Non ho trovato dati per questo giorno
+            </h1>
+          )}
     </>
   );
 }

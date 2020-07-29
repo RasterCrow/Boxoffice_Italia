@@ -5,10 +5,13 @@
   max-width: 80%;
 }
 
+#titolo_list h1 {
+  font-size: 2vw;
+}
+
 #titolo_list {
   margin: auto;
   text-align: center;
-  font-size: 2vw;
 }
 
 #buttonRow {

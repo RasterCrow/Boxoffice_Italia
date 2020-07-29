@@ -1,25 +1,24 @@
 import React, { useState, useEffect } from "react";
 import BoxOfficeService from "../services/boxoffice.js";
 import Table from "react-bootstrap/Table";
-import YearlyMovie from "./YearlyMovie";
+import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
 
-function Yearlyboxoffice(props) {
-    const [yearlyList, setYearlyList] = useState([]);
+function AllTimeboxoffice() {
+    const [allTimeList, setallTimeList] = useState([]);
 
     //hook effect, loads everytime there is a rebuild
     const hook = () => {
-        BoxOfficeService.getYearlyBoxOfficeList(props.year).then((list) => {
-            setYearlyList(list);
-            console.log(list)
+        BoxOfficeService.getAllTimeBoxOfficeList().then((list) => {
+            setallTimeList(list);
         });
     };
 
-    useEffect(hook, [props.year]);
+    useEffect(hook, []);
     let posizione = 0
     return (
         <>
-            {yearlyList.length > 0 ? (
+            {allTimeList.length > 0 ? (
                 <Table
                     id="tabellaDaily"
                     striped
@@ -38,16 +37,18 @@ function Yearlyboxoffice(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {yearlyList.map((movie) => (
-                            <YearlyMovie key={movie._id} movie={movie} posizione={posizione += 1} />
+                        {allTimeList.map((movie) => (
+                            <TableMovie key={movie.id} movieProps={movie} tableType="all-time" posizione={posizione += 1} />
                         ))}
                     </tbody>
                 </Table>
             ) : (
-                    <h2>Non ho trovato dati per quest anno</h2>
+                    <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+                        Non ho trovato dati per questo giorno
+                    </h1>
                 )}
         </>
     );
 }
 
-export default Yearlyboxoffice;
+export default AllTimeboxoffice;

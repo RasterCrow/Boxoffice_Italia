@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
+import DatePicker from "react-date-picker";
 
-import Weekendboxoffice from "./components/Weekendboxoffice";
-import Dailyboxoffice from "./components/Dailyboxoffice";
-import Yearlyboxoffice from "./components/Yearlyboxoffice";
-import AllTimeboxoffice from "./components/AllTimeboxoffice";
+import Weekendboxoffice from "./components/WeekendTable";
+import Dailyboxoffice from "./components/DailyTable";
+import Yearlyboxoffice from "./components/YearlyTable";
+import AllTimeboxoffice from "./components/AllTimeTable";
 import MyNavbar from "./components/Navbar";
 import MovieInfo from "./components/MovieInfo";
+import "./App.css";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
 
@@ -135,6 +137,13 @@ function App() {
     event.preventDefault();
   };
 
+  const handleChangePickerDate = (newDate) => {
+    let newDate_month = ("0" + (newDate.getMonth() + 1)).slice(-2);
+    let newDate_giorno = ("0" + newDate.getDate()).slice(-2);
+    let newDate_format =
+      newDate.getFullYear() + "-" + newDate_month + "-" + newDate_giorno;
+    setDay(newDate_format);
+  };
   return (
     <Router>
       {/*
@@ -147,11 +156,19 @@ function App() {
       <MyNavbarWithRouter />
       <Switch>
         <Route exact path="/daily">
-          <Row id="buttonRow" fluid>
+          <Row id="buttonRow">
             <Button value="day" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
-            <h1 id="titolo_list">Incasso del giorno {day}</h1>
+            <div id="titolo_list">
+              <h1>Incasso del giorno {day}</h1>
+              <DatePicker
+                clearIcon={null}
+                maxDate={new Date(date_format)}
+                onChange={handleChangePickerDate}
+                value={new Date(day)}
+              />
+            </div>
             {day === date_format ? (
               <Button value="day" onClick={handleButtonSuccessivo} disabled>
                 Successivo
@@ -165,7 +182,7 @@ function App() {
           <Dailyboxoffice day={day} />
         </Route>
         <Route exact path="/weekly">
-          <Row id="buttonRow" fluid>
+          <Row id="buttonRow">
             <Button value="weekend" onClick={handleButtonPrecedente}>
               Precedente
             </Button>
