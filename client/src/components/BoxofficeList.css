@@ -19,3 +19,10 @@
   margin-left: 50px;
   margin-right: 50px;
 }
+
+.sticky {
+  top: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  background-color: rgb(27, 26, 26);
+}

@@ -8,13 +8,14 @@ body {
 
 html,
 body {
-  background-color: black;
+  background-color: rgb(27, 26, 26);
 }
 
 #root {
-  background-color: black;
+  background-color: rgb(27, 26, 26);
   color: white;
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

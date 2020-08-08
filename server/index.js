@@ -234,7 +234,8 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
 
 
 //retrieves by movie id
-app.get("/boxoffice/dailyboxoffice/:id", (req, res) => {
+app.get("/boxoffice/dailyboxofficeMovie/:id", (req, res) => {
+  console.log(req.params.id)
   Dailyboxoffice_db.find({ movie: req.params.id })
     .then((daily_list) => {
       if (daily_list) {
@@ -285,7 +286,7 @@ app.get("/boxoffice/weekendboxoffice/:weekend", (req, res) => {
 });
 
 //retrieves weekend box office by id of movie
-app.get("/boxoffice/weekendboxoffice/:id", (req, res) => {
+app.get("/boxoffice/weekendboxofficeMovie/:id", (req, res) => {
   Weekendboxoffice_db.find({ movie: req.params.id })
     .then((weekend_list) => {
       if (weekend_list) {

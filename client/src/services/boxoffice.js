@@ -33,8 +33,8 @@ const getMovieInfo = (id) => {
     return request.then(response => response.data)
 }
 const getMovieInfoTMDB = (id) => {
-    const request = axios.get(`${baseUrl}/movies/tmdb/${id}`)
 
+    const request = axios.get(`${baseUrl}/movies/tmdb/${id}`)
     return request.then(response => response.data)
 }
 
@@ -46,7 +46,13 @@ const getAllTimeBoxOfficeList = () => {
 }
 
 const getMovieDailyBoxOfficeList = (id) => {
-    const request = axios.get(`${baseUrl}/dailyboxoffice/${id}`)
+    const request = axios.get(`${baseUrl}/dailyboxofficeMovie/${id}`)
+
+    return request.then(response => response.data)
+}
+
+const getMovieWeekendBoxOfficeList = (id) => {
+    const request = axios.get(`${baseUrl}/weekendboxofficeMovie/${id}`)
 
     return request.then(response => response.data)
 }
@@ -72,5 +78,6 @@ export default {
     getYearlyBoxOfficeList,
     getAllTimeBoxOfficeList,
     getMovieInfoTMDB,
-    getMovieDailyBoxOfficeList
+    getMovieDailyBoxOfficeList,
+    getMovieWeekendBoxOfficeList
 }

@@ -23,7 +23,7 @@ function MyNavbar(props) {
                 //onSelect={(selectedKey) => console.log(selectedKey)}
                 >
                     <Nav.Link href="/daily">Daily </Nav.Link>
-                    <Nav.Link href="/weekly">Weekly </Nav.Link>
+                    <Nav.Link href="/weekly">Weekend </Nav.Link>
                     <Nav.Link href="/yearly">Yearly</Nav.Link>
                     <Nav.Link href="/all-time">All Time</Nav.Link>
 

@@ -9,7 +9,6 @@ function TableMovie(props) {
   const [movieInfo, setMovieInfo] = useState("");
   const history = useHistory();
 
-
   //when it loads, it should retrieve data of the movie from the db, like title and such
 
   const hook = () => {
@@ -129,6 +128,84 @@ function TableMovie(props) {
       </>
     );
 
+  } else if (tableType === "movieInfoDay") {
+    let isWeekend = false
+    movieProps.giorno !== undefined ? isWeekend = ((new Date(movieProps.giorno).getDay() === 5) || (new Date(movieProps.giorno).getDay() === 6) || (new Date(movieProps.giorno).getDay() === 0)) : isWeekend = false
+    return (
+      <>
+        {movieProps !== "" ? (
+          <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
+            {isWeekend ?
+              <td style={{ color: "orange" }}>{movieProps.giorno !== undefined ? ((new Date(movieProps.giorno).getDate()) + "-" + (new Date(movieProps.giorno).getMonth() + 1) + "-" + new Date(movieProps.giorno).getFullYear()) : "Sconosciuto"}</td>
+              :
+              <td>{movieProps.giorno !== undefined ? ((new Date(movieProps.giorno).getDate()) + "-" + (new Date(movieProps.giorno).getMonth() + 1) + "-" + new Date(movieProps.giorno).getFullYear()) : "Sconosciuto"}</td>
+            }
+
+            <td>{movieProps.posizioneClassifica}</td>
+            <td>
+              {movieProps.incasso.toLocaleString(
+                undefined, // leave undefined to use the browser's locale,
+                // or use a string like 'en-US' to override it.
+                { minimumFractionDigits: 0 }
+              )}
+            </td>
+            <td>
+              {movieProps.presenze.toLocaleString(
+                undefined, // leave undefined to use the browser's locale,
+                // or use a string like 'en-US' to override it.
+                { minimumFractionDigits: 0 }
+              )}
+            </td>
+            <td>
+              {movieProps.incassoTotaleAlGiorno.toLocaleString(
+                undefined, // leave undefined to use the browser's locale,
+                // or use a string like 'en-US' to override it.
+                { minimumFractionDigits: 0 }
+              )}
+            </td>
+          </tr>
+        ) : (
+            //maybe show loading icon
+            <tr>
+              <td>Loading movie...</td>
+            </tr>
+          )
+        }
+      </>
+    );
+  } else if (tableType === "movieInfoDayWeekend") {
+
+    return (
+      <>
+        {movieProps !== "" ? (
+
+          <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
+            <td>{(new Date(movieProps.inizioWeekend).getDate()) + "-" + (new Date(movieProps.inizioWeekend).getMonth() + 1) + " / " + (new Date(movieProps.fineWeekend).getDate()) + "-" + (new Date(movieProps.fineWeekend).getMonth() + 1)}</td>
+            <td>{movieProps.posizioneClassificaWeekend}</td>
+            <td>
+              {parseInt(movieProps.incassoWeekend).toLocaleString(
+                undefined, // leave undefined to use the browser's locale,
+                // or use a string like 'en-US' to override it.
+                { minimumFractionDigits: 0 }
+              )}
+            </td>
+            <td>
+              {parseInt(movieProps.presenzeWeekend).toLocaleString(
+                undefined, // leave undefined to use the browser's locale,
+                // or use a string like 'en-US' to override it.
+                { minimumFractionDigits: 0 }
+              )}
+            </td>
+            <td>{movieProps.weekendNumero}</td>
+          </tr>
+        ) : (
+            //maybe show loading icon
+            <tr>
+              <td>Loading movie...</td>
+            </tr>
+          )}
+      </>
+    );
   }
 }
 

@@ -1,0 +1,54 @@
+#MovieRandomInfo img {
+  max-width: 30px;
+  max-height: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#MovieTitle {
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 3vw;
+}
+
+#ImagePoster img {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 40px;
+  height: 450px;
+  box-shadow: 10px 5px 5px rgba(255, 255, 255, 0.219);
+}
+#ImagePoster {
+  max-width: 500px;
+  text-align: center;
+}
+#MovieInfo {
+  margin-left: 50px;
+}
+
+#MovieRandomInfo {
+  margin: auto;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+#MovieDescription {
+  margin: auto;
+  background-color: aliceblue;
+  padding: 20px;
+  max-width: 1000px;
+
+  color: black !important;
+  box-shadow: 10px 5px 5px rgba(255, 255, 255, 0.219);
+  margin-bottom: 20px;
+}
+#MovieInfoSticky div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#MovieInfoSticky {
+  box-shadow: 0px 10px 3px rgba(0, 0, 0, 0.219);
+}
