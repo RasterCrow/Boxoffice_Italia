@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { withRouter } from "react-router";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -14,6 +15,8 @@ import MovieInfo from "./components/MovieInfo";
 import "./App.css";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
+
+
 
 function App() {
   //SCHIFEZZE INCREDIBILI PER CALCOLARE DATA DI OGGI E DELLO SCORSO WEEKEND
@@ -42,6 +45,9 @@ function App() {
   const [weekend, setWeekend] = useState(weekend_date_format);
   //weekend sarebbe il giorno di inizio dell-weekend che voglio cercare
   const [year, setYear] = useState(full_year);
+
+
+
 
   const handleButtonPrecedente = (event) => {
     //if its the button for day update day, else update weekend
@@ -146,13 +152,7 @@ function App() {
   };
   return (
     <Router>
-      {/*
-      In questa pagina va creata una home page, magari con qualche news di film dall'internet
-    <Dailyboxoffice day={day}/>
-    <Weekendboxoffice weekendStart={weekendStart} />
-    <BoxOfficeYear year={2020}/>
-    <BoxOfficeAllTime/>
-     */}
+
       <MyNavbarWithRouter />
       <Switch>
         <Route exact path="/daily">
@@ -174,14 +174,15 @@ function App() {
                 Successivo
               </Button>
             ) : (
-              <Button value="day" onClick={handleButtonSuccessivo}>
-                Successivo
-              </Button>
-            )}
+                <Button value="day" onClick={handleButtonSuccessivo}>
+                  Successivo
+                </Button>
+              )}
           </Row>
           <Dailyboxoffice day={day} />
         </Route>
         <Route exact path="/weekly">
+
           <Row id="buttonRow">
             <Button value="weekend" onClick={handleButtonPrecedente}>
               Precedente
@@ -192,10 +193,10 @@ function App() {
                 Successivo
               </Button>
             ) : (
-              <Button value="weekend" onClick={handleButtonSuccessivo}>
-                Successivo
-              </Button>
-            )}
+                <Button value="weekend" onClick={handleButtonSuccessivo}>
+                  Successivo
+                </Button>
+              )}
           </Row>
           <Weekendboxoffice weekend={weekend} />
         </Route>
@@ -210,10 +211,10 @@ function App() {
                 Successivo
               </Button>
             ) : (
-              <Button value="year" onClick={handleButtonSuccessivo}>
-                Successivo
-              </Button>
-            )}
+                <Button value="year" onClick={handleButtonSuccessivo}>
+                  Successivo
+                </Button>
+              )}
           </Row>
           <Yearlyboxoffice year={year} />
         </Route>

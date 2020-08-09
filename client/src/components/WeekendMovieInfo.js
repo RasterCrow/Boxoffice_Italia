@@ -26,7 +26,7 @@ function WeekendMovieInfo(props) {
                     striped
                     bordered
                     hover
-                    responsive="md"
+
                     variant="dark"
                     size="sm"
                 >

@@ -34,7 +34,7 @@ function DailyMovieInfo(props) {
                     striped
                     bordered
                     hover
-                    responsive="lg"
+
                     variant="dark"
                     size="sm"
                 >

@@ -131,14 +131,31 @@ function TableMovie(props) {
   } else if (tableType === "movieInfoDay") {
     let isWeekend = false
     movieProps.giorno !== undefined ? isWeekend = ((new Date(movieProps.giorno).getDay() === 5) || (new Date(movieProps.giorno).getDay() === 6) || (new Date(movieProps.giorno).getDay() === 0)) : isWeekend = false
+
+
+      (
+        ('0' + (new Date(movieProps.giorno).getDate())).slice(-2) + '/'
+        + ('0' + (new Date(movieProps.giorno).getMonth() + 1)).slice(-2) + '/' +
+        (new Date(movieProps.giorno).getFullYear()))
+
+
     return (
       <>
         {movieProps !== "" ? (
-          <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
+          <tr onClick={(event) => history.push({
+            pathname: '/daily',
+            state: { giorno: new Date(movieProps.giorno) }
+          })}>
             {isWeekend ?
-              <td style={{ color: "orange" }}>{movieProps.giorno !== undefined ? ((new Date(movieProps.giorno).getDate()) + "-" + (new Date(movieProps.giorno).getMonth() + 1) + "-" + new Date(movieProps.giorno).getFullYear()) : "Sconosciuto"}</td>
+              <td style={{ color: "orange" }}>{movieProps.giorno !== undefined ? (
+                ('0' + (new Date(movieProps.giorno).getDate())).slice(-2) + '/'
+                + ('0' + (new Date(movieProps.giorno).getMonth() + 1)).slice(-2) + '/' +
+                (new Date(movieProps.giorno).getFullYear())) : "Sconosciuto"}</td>
               :
-              <td>{movieProps.giorno !== undefined ? ((new Date(movieProps.giorno).getDate()) + "-" + (new Date(movieProps.giorno).getMonth() + 1) + "-" + new Date(movieProps.giorno).getFullYear()) : "Sconosciuto"}</td>
+              <td>{movieProps.giorno !== undefined ? (
+                ('0' + (new Date(movieProps.giorno).getDate())).slice(-2) + '/'
+                + ('0' + (new Date(movieProps.giorno).getMonth() + 1)).slice(-2) + '/' +
+                (new Date(movieProps.giorno).getFullYear())) : "Sconosciuto"}</td>
             }
 
             <td>{movieProps.posizioneClassifica}</td>
@@ -179,8 +196,16 @@ function TableMovie(props) {
       <>
         {movieProps !== "" ? (
 
-          <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
-            <td>{(new Date(movieProps.inizioWeekend).getDate()) + "-" + (new Date(movieProps.inizioWeekend).getMonth() + 1) + " / " + (new Date(movieProps.fineWeekend).getDate()) + "-" + (new Date(movieProps.fineWeekend).getMonth() + 1)}</td>
+          <tr onClick={(event) => history.push({
+            pathname: '/weekly',
+            state: { weekend: new Date(movieProps.inizioWeekend) }
+          })}
+          >
+            <td>{(
+              ('0' + (new Date(movieProps.inizioWeekend).getDate())).slice(-2) + '/'
+              + ('0' + (new Date(movieProps.inizioWeekend).getMonth() + 1)).slice(-2) + ' - ' +
+              ('0' + (new Date(movieProps.fineWeekend).getDate())).slice(-2) + '/' +
+              ('0' + (new Date(movieProps.fineWeekend).getMonth() + 1)).slice(-2))}</td>
             <td>{movieProps.posizioneClassificaWeekend}</td>
             <td>
               {parseInt(movieProps.incassoWeekend).toLocaleString(

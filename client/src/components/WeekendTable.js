@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import BoxOfficeService from "../services/boxoffice.js";
+
 import Table from "react-bootstrap/Table";
 
 import "./BoxofficeList.css";
@@ -9,7 +10,7 @@ function Weekendboxoffice(props) {
   const { weekend } = props;
   const [weekendList, setWeekendList] = useState([]);
 
-  //hook effect, loads everytime there is a rebuild
+  //hook effect, loads everytime there is a rebuild with new weekend
   const hook = () => {
     BoxOfficeService.getWeekendBoxOfficeList(weekend).then((list) => {
       setWeekendList(list);

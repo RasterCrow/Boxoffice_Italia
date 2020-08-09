@@ -11,7 +11,7 @@ import BoxOfficeService from "../services/boxoffice.js";
 
 function MovieInfo(props) {
   let movieID = props.match.params.id
-  console.log(movieID)
+
   const [movieDataTMDB, setMovieDataTMDB] = useState(null)
 
   const [movieDataMongo, setMovieDataMongo] = useState(null)
@@ -50,7 +50,7 @@ function MovieInfo(props) {
       //Codice che dovrebbe girare normalmente
       BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
         setMovieDataTMDB(movie);
-        console.log(movie)
+
       });
 
 
@@ -81,7 +81,7 @@ function MovieInfo(props) {
                   </div>
                 </Row>
 
-                <Row >
+                <Row id="RowMovieRandomInfo">
                   <div id="MovieRandomInfo">
                     <Image src={"/assets/tomato.svg"}></Image>
                     {movieDataTMDB.vote_average}
@@ -114,8 +114,12 @@ function MovieInfo(props) {
               </Row>
 
               <Row >
+                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
                 <DailyMovieInfo movieID={movieID} />
+                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
                 <WeekendMovieInfo movieID={movieID} />
+
+
               </Row>
             </Col>
           </Row>
