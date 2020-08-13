@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Button from 'react-bootstrap/Button'
@@ -6,10 +6,28 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Image from 'react-bootstrap/Image'
+import { useHistory } from "react-router-dom";
 import './Navbar.css';
 
 function MyNavbar(props) {
     const { location } = props;
+    const [movieToSearch, setMovieToSearch] = useState("")
+    const history = useHistory();
+
+    const handleChange = (event) => {
+        setMovieToSearch(event.target.value);
+    }
+
+    const handleSubmit = (event) => {
+        history.push({
+            pathname: '/search',
+            search: `?${movieToSearch}`,
+            state: { movie: movieToSearch }
+        })
+        //redirect to search page with movies that start with input value
+        event.preventDefault();
+    }
+
     return (
         <>
             <Jumbotron className="jumbo" fluid>
@@ -28,8 +46,8 @@ function MyNavbar(props) {
                     <Nav.Link href="/all-time">All Time</Nav.Link>
 
                 </Nav>
-                <Form inline>
-                    <FormControl type="text" placeholder="Search a movie" className="mr-sm-2" />
+                <Form inline onSubmit={handleSubmit}>
+                    <FormControl type="text" placeholder="Search a movie" className="mr-sm-2" onChange={handleChange} />
                     <Button variant="outline-light" type="submit">Search</Button>
                 </Form>
             </Navbar>

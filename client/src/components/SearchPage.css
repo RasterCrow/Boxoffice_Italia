@@ -1,0 +1,19 @@
+#searchZone {
+  width: 500px;
+  margin: 0 auto;
+  line-height: 1.4em;
+  text-align: center;
+}
+#searchZone h1 {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#MovieItem {
+  color: black;
+}
+#MovieItem:hover {
+  color: white;
+  background-color: rgb(38, 120, 228);
+  cursor: pointer;
+}

@@ -116,19 +116,37 @@ app.get("/boxoffice", (req, res) => {
 
 //retrieves all movie documents
 app.get("/boxoffice/movies", (req, res) => {
-  Movie_db.find({})
-    .then((movies_list) => {
-      if (movies_list) {
-        res.json(movies_list);
-      } else {
-        res.status(404).end();
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).end();
-    });
+  console.log(req.query.title)
+  if (req.query.length == 0) {
+    Movie_db.find({})
+      .then((movies_list) => {
+        if (movies_list) {
+          res.json(movies_list);
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).end();
+      });
+  } else {
+    var regexp = new RegExp("^" + req.query.title.toUpperCase());
+    Movie_db.find({ titolo: regexp })
+      .then((movies_list) => {
+        if (movies_list) {
+          res.json(movies_list);
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).end();
+      });
+  }
 });
+
 
 //retrieves movie by id
 app.get("/boxoffice/movies/:id", (req, res) => {
@@ -157,6 +175,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
       if (movie) {
         let movie_found = true;
         let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
+        console.log(titolo)
         //retrieve movie data and also movie info from tmdb
         //make axios call to tmdb
         await axios
@@ -170,7 +189,9 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
           })
           .then((axios_res) => {
             //sort the result by popularity
+
             axios_res.data.results.sort(GetSortOrder("popularity"));
+
             //returns the most popular one
             res.json(axios_res.data.results[0]);
           })
@@ -235,11 +256,11 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
 
 //retrieves by movie id
 app.get("/boxoffice/dailyboxofficeMovie/:id", (req, res) => {
-  console.log(req.params.id)
+  //console.log(req.params.id)
   Dailyboxoffice_db.find({ movie: req.params.id })
     .then((daily_list) => {
       if (daily_list) {
-        console.log(daily_list)
+        //console.log(daily_list)
         res.json(daily_list);
       } else {
         res.status(404).end();

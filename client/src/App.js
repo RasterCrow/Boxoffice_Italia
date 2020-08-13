@@ -12,6 +12,7 @@ import Yearlyboxoffice from "./components/YearlyTable";
 import AllTimeboxoffice from "./components/AllTimeTable";
 import MyNavbar from "./components/Navbar";
 import MovieInfo from "./components/MovieInfo";
+import SearchPage from "./components/SearchPage"
 import "./App.css";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
@@ -227,7 +228,8 @@ function App() {
         <Route exact path="/">
           <h1> Home</h1>
         </Route>
-
+        <Route path="/search" component={SearchPage}>
+        </Route>
         <Route path="/movie/:id" component={MovieInfo}></Route>
       </Switch>
     </Router>

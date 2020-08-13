@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { withRouter } from 'react-router'
 import { useHistory } from "react-router-dom";
 import BoxOfficeService from "../services/boxoffice.js";
-
+import "./BoxofficeList.css"
 function TableMovie(props) {
   const { movieProps, tableType, posizione } = props
   //console.log(props)

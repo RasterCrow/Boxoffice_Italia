@@ -49,7 +49,9 @@ function MovieInfo(props) {
     } else {
       //Codice che dovrebbe girare normalmente
       BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
+
         setMovieDataTMDB(movie);
+
 
       });
 
