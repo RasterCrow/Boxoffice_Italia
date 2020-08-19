@@ -6,7 +6,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.25"
   },
-  "name": "server",
+  "name": "boxofficeitalia",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {
@@ -18,7 +18,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Alex Andries",
   "license": "ISC",
-  "description": ""
+  "description": "BoxOffice Italia WebApp"
 }

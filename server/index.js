@@ -6,14 +6,18 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const axios = require("axios");
 const { json } = require("express");
+var path = require('path')
 
 const app = express();
 
+
+
 // Read the host address and the port from the environment
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
-//mongodb info
+console.log("PORT : " + PORT)
+
 
 const mongodb_uri = process.env.MONGODB_URI;
 
@@ -113,6 +117,7 @@ app.get("/", (req, res) => {
 app.get("/boxoffice", (req, res) => {
   res.send("<h1>Hello BoxOffice!</h1>");
 });
+
 
 //retrieves all movie documents
 app.get("/boxoffice/movies", (req, res) => {
@@ -237,11 +242,12 @@ app.get("/boxoffice/dailyboxoffice", (req, res) => {
 
 //retrieves by day
 app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
-  //console.log("chiamata a dailyBoxoffice/:day");
+  console.log("chiamata a dailyBoxoffice/:day");
 
   Dailyboxoffice_db.find({ giorno: req.params.day })
     .then((daily_list) => {
       if (daily_list) {
+        console.log(daily_list)
         res.json(daily_list);
       } else {
         res.status(404).end();

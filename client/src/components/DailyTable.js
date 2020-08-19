@@ -18,6 +18,7 @@ function Dailyboxoffice(props) {
     setFetchedDataComplete(false);
     BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
       setDailyList(list);
+      console.log(list)
     });
   };
 
