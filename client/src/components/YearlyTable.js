@@ -2,16 +2,20 @@ import React, { useState, useEffect } from "react";
 import BoxOfficeService from "../services/boxoffice.js";
 import Table from "react-bootstrap/Table";
 import TableMovie from "./TableMovie";
+import Image from "react-bootstrap/Image"
+
 import "./BoxofficeList.css";
 
 function Yearlyboxoffice(props) {
     const [yearlyList, setYearlyList] = useState([]);
+    const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
 
     //hook effect, loads everytime there is a rebuild
     const hook = () => {
+        setFetchedDataComplete(false)
         BoxOfficeService.getYearlyBoxOfficeList(props.year).then((list) => {
             setYearlyList(list);
-            console.log(list)
+            setFetchedDataComplete(true)
         });
     };
 
@@ -19,7 +23,9 @@ function Yearlyboxoffice(props) {
     let posizione = 0
     return (
         <>
-            {yearlyList.length > 0 ? (
+            {!fetchedDataComplete ? (
+                <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
+            ) : yearlyList.length > 0 ? (
                 <Table
                     id="tabellaDaily"
                     striped
@@ -44,10 +50,10 @@ function Yearlyboxoffice(props) {
                     </tbody>
                 </Table>
             ) : (
-                    <h1 style={{ textAlign: "center", marginTop: "100px" }}>
-                        Non ho trovato dati per questo giorno
-                    </h1>
-                )}
+                        <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+                            Non ho trovato dati per questo giorno
+                        </h1>
+                    )}
         </>
     );
 }

@@ -15,19 +15,21 @@ function Dailyboxoffice(props) {
 
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    setFetchedDataComplete(false);
+
     BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
       setDailyList(list);
-      console.log(list)
+      setFetchedDataComplete(true);
     });
+
+
   };
 
   useEffect(hook, [props.day]);
 
   return (
     <>
-      {fetchedDataComplete ? (
-        <Image src="/assets/loading_icon.svg" style={{ margin: "auto" }} />
+      {!fetchedDataComplete ? (
+        <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
       ) : dailyList.length > 0 ? (
         <Table
           id="tabellaDaily"

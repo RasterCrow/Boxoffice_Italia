@@ -7,7 +7,7 @@ import "./SearchPage.css";
 //Per ora mostro solo una lista
 
 function MovieCard({ movieProps }) {
-    console.log(movieProps)
+
     const history = useHistory();
     return (
 

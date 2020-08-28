@@ -54,9 +54,36 @@ function DailyMovieInfo(props) {
                     </tbody>
                 </Table>
             ) : (
-                        <h2 style={{ textAlign: "center", marginTop: "100px" }}>
-                            Non ci sono dati dei giorni
-                        </h2>
+                        <>
+
+                            <Table
+                                id="tabellaDaily"
+                                striped
+                                bordered
+                                hover
+
+                                variant="dark"
+                                size="sm"
+                            >
+                                <thead>
+                                    <tr>
+                                        <th>Giorno</th>
+                                        <th>Posizione</th>
+                                        <th>Incasso</th>
+                                        <th>Presenze</th>
+                                        <th>Incasso ad oggi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colSpan="5">Non ho dati</td>
+                                    </tr>
+
+                                </tbody>
+                            </Table>
+
+
+                        </>
                     )}
         </>
     );

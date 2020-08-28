@@ -247,7 +247,7 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
   Dailyboxoffice_db.find({ giorno: req.params.day })
     .then((daily_list) => {
       if (daily_list) {
-        console.log(daily_list)
+
         res.json(daily_list);
       } else {
         res.status(404).end();

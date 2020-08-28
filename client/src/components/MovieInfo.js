@@ -70,12 +70,12 @@ function MovieInfo(props) {
       {movieDataTMDB !== null && movieDataMongo !== null ? (
         <div>
           <Row >
-            <Col lg={5} id="ImagePoster" >
+            <Col lg={5} id="ImagePoster" style={{ marginLeft: "auto", marginRight: "auto" }}>
               <div className="sticky">
                 <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
               </div>
             </Col>
-            <Col lg={7} id="MovieInfo">
+            <Col lg={7} id="MovieInfo" style={{ margin: "auto" }}>
               <div className="sticky" id="MovieInfoSticky">
                 <Row >
                   <div id="MovieTitle">
@@ -109,27 +109,22 @@ function MovieInfo(props) {
                   </div>
                 </Row>
               </div>
-              <Row >
-                <div id="MovieDescription">
-                  {movieDataTMDB.overview}
-                </div>
-              </Row>
-
-              <Row >
-                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
-                <DailyMovieInfo movieID={movieID} />
-                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
-                <WeekendMovieInfo movieID={movieID} />
-
-
-              </Row>
+              {/* Movie Description*/}
+              <div id="MovieDescription">
+                {movieDataTMDB.overview}
+              </div>
+              {/* Table Data */}
+              <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
+              <DailyMovieInfo movieID={movieID} />
+              <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
+              <WeekendMovieInfo movieID={movieID} />
             </Col>
           </Row>
 
         </div>
         //Aggiungere tabella per daily boxoffice e weekend box office
       ) : (
-          <p>Carico il film ...</p>
+          <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
         )
       }
     </>

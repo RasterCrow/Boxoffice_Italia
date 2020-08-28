@@ -46,10 +46,36 @@ function WeekendMovieInfo(props) {
                     </tbody>
                 </Table>
             ) : (
-                    <h2 style={{ textAlign: "center", marginTop: "100px" }}>
-                        Non ci sono dati dell'weekend
-                    </h2>
-                )}
+                    <>
+
+                        <Table
+                            id="tabellaDaily"
+                            striped
+                            bordered
+                            hover
+
+                            variant="dark"
+                            size="sm"
+                        >
+                            <thead>
+                                <tr>
+                                    <th>Weekend</th>
+                                    <th>Posizione</th>
+                                    <th>Incasso</th>
+                                    <th>Presenze</th>
+                                    <th>Weekend in classifica</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="5">Non ho dati</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+
+                    </>
+                )
+            }
         </>
     );
 }
