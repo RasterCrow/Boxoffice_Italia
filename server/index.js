@@ -178,9 +178,10 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
   Movie_db.findById(id.toString())
     .then(async (movie) => {
       if (movie) {
-        let movie_found = true;
+
         let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
         console.log(titolo)
+
         //retrieve movie data and also movie info from tmdb
         //make axios call to tmdb
         await axios

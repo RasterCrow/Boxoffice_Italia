@@ -52,7 +52,6 @@ function MovieInfo(props) {
 
         setMovieDataTMDB(movie);
 
-
       });
 
 
@@ -68,61 +67,91 @@ function MovieInfo(props) {
   return (
     <>
       {movieDataTMDB !== null && movieDataMongo !== null ? (
-        <div>
-          <Row >
-            <Col lg={5} id="ImagePoster" style={{ marginLeft: "auto", marginRight: "auto" }}>
-              <div className="sticky">
-                <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
-              </div>
-            </Col>
-            <Col lg={7} id="MovieInfo" style={{ margin: "auto" }}>
-              <div className="sticky" id="MovieInfoSticky">
+        movieDataTMDB.length > 0 ? (
+          <div>
+            <Row >
+              <Col lg={5} id="ImagePoster" style={{ marginLeft: "auto", marginRight: "auto" }}>
+                <div className="sticky">
+                  <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
+                </div>
+              </Col>
+              <Col lg={7} id="MovieInfo" style={{ margin: "auto" }}>
+                <div className="sticky" id="MovieInfoSticky">
+                  <Row >
+                    <div id="MovieTitle">
+                      {movieDataTMDB.title}
+                    </div>
+                  </Row>
+
+                  <Row id="RowMovieRandomInfo">
+                    <div id="MovieRandomInfo">
+                      <Image src={"/assets/tomato.svg"}></Image>
+                      {movieDataTMDB.vote_average}
+                      <Image src={"/assets/language.svg"}></Image>
+                      {movieDataTMDB.original_language != undefined ? ("SCONOSCIUTO") : (movieDataTMDB.original_language).toUpperCase()}
+                      <Image src={"/assets/calendar_icon.svg"}></Image>
+                      {movieDataTMDB.release_date}
+                      <Image src={"/assets/incasso_icon.svg"}></Image>
+
+                      {parseInt(movieDataMongo.incasso).toLocaleString(
+                        undefined, // leave undefined to use the browser's locale,
+                        // or use a string like 'en-US' to override it.
+                        { minimumFractionDigits: 0 }
+                      )}
+                      <Image src={"/assets/tickets_icon.svg"}></Image>
+
+                      {parseInt(movieDataMongo.presenze).toLocaleString(
+                        undefined, // leave undefined to use the browser's locale,
+                        // or use a string like 'en-US' to override it.
+                        { minimumFractionDigits: 0 }
+                      )}
+
+                    </div>
+                  </Row>
+                </div>
+                {/* Movie Description*/}
+                <div id="MovieDescription">
+                  {movieDataTMDB.overview}
+                </div>
+                {/* Table Data */}
+                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
+                <DailyMovieInfo movieID={movieID} />
+                <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
+                <WeekendMovieInfo movieID={movieID} />
+              </Col>
+            </Row>
+
+          </div>
+        ) :
+          (
+            <>
+              <h2 style={{ color: "red", textAlign: "center", marginTop: "40px" }}>
+                Non ho trovato dati extra per questo film
+            </h2>
+              <div>
                 <Row >
-                  <div id="MovieTitle">
-                    {movieDataTMDB.title}
-                  </div>
+
+                  <Col lg={7} id="MovieInfo" style={{ margin: "auto" }}>
+                    <div className="sticky" id="MovieInfoSticky">
+                      <Row >
+                        <div id="MovieTitle">
+                          {movieDataMongo.titolo}
+                        </div>
+                      </Row>
+                    </div>
+
+                    {/* Table Data */}
+                    <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
+                    <DailyMovieInfo movieID={movieID} />
+                    <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
+                    <WeekendMovieInfo movieID={movieID} />
+                  </Col>
                 </Row>
 
-                <Row id="RowMovieRandomInfo">
-                  <div id="MovieRandomInfo">
-                    <Image src={"/assets/tomato.svg"}></Image>
-                    {movieDataTMDB.vote_average}
-                    <Image src={"/assets/language.svg"}></Image>
-                    {(movieDataTMDB.original_language).toUpperCase()}
-                    <Image src={"/assets/calendar_icon.svg"}></Image>
-                    {movieDataTMDB.release_date}
-                    <Image src={"/assets/incasso_icon.svg"}></Image>
-
-                    {parseInt(movieDataMongo.incasso).toLocaleString(
-                      undefined, // leave undefined to use the browser's locale,
-                      // or use a string like 'en-US' to override it.
-                      { minimumFractionDigits: 0 }
-                    )}
-                    <Image src={"/assets/tickets_icon.svg"}></Image>
-
-                    {parseInt(movieDataMongo.presenze).toLocaleString(
-                      undefined, // leave undefined to use the browser's locale,
-                      // or use a string like 'en-US' to override it.
-                      { minimumFractionDigits: 0 }
-                    )}
-
-                  </div>
-                </Row>
               </div>
-              {/* Movie Description*/}
-              <div id="MovieDescription">
-                {movieDataTMDB.overview}
-              </div>
-              {/* Table Data */}
-              <h2 style={{ margin: "auto", textAlign: "center", marginTop: "30px" }}>Incassi giornalieri</h2>
-              <DailyMovieInfo movieID={movieID} />
-              <h2 style={{ margin: "auto", textAlign: "center", marginTop: "10px" }}>Incassi weekend</h2>
-              <WeekendMovieInfo movieID={movieID} />
-            </Col>
-          </Row>
+            </>
+          )
 
-        </div>
-        //Aggiungere tabella per daily boxoffice e weekend box office
       ) : (
           <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
         )
