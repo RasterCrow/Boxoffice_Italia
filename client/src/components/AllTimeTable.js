@@ -3,6 +3,7 @@ import BoxOfficeService from "../services/boxoffice.js";
 import Table from "react-bootstrap/Table";
 import TableMovie from "./TableMovie";
 import Image from "react-bootstrap/Image"
+import Row from "react-bootstrap/Row";
 import "./BoxofficeList.css";
 
 function AllTimeboxoffice() {
@@ -21,6 +22,9 @@ function AllTimeboxoffice() {
     let posizione = 0
     return (
         <>
+            <Row id="buttonRow">
+                <h1 id="titolo_list"> Maggiori incassi di sempre </h1>
+            </Row>
             {!fetchedDataComplete ? (
                 <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
             ) : allTimeList.length > 0 ? (
