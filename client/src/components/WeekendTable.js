@@ -15,7 +15,7 @@ function Weekendboxoffice(props) {
   let weekend_first
   let stateDate = props.location.state
   console.log(stateDate)
-  if (stateDate != undefined) {
+  if (stateDate !== undefined) {
     weekend_first = stateDate.weekend
   } else {
     let date = new Date();

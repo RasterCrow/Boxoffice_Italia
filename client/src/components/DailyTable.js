@@ -15,7 +15,7 @@ function Dailyboxoffice(props) {
 
   let stateDate = props.location.state
   console.log(stateDate)
-  if (stateDate != undefined) {
+  if (stateDate !== undefined) {
     date = stateDate.giorno
   } else {
     date = new Date();

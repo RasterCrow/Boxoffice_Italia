@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Image from 'react-bootstrap/Image'
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import './Navbar.css';
 
 function MyNavbar(props) {

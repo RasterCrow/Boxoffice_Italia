@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Carousel from "react-bootstrap/Carousel"
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -63,9 +63,9 @@ function Home() {
                     <p>
                         Su questo sito puoi seguire l'andamento al botteghino della maggior parte dei film usciti in Italia al cinema.
                         <br />
-                            Se volete aiutarmi allo sviluppo potete trovare tutto il codice <a target='_blank' href="https://github.com/RasterCrow/Boxoffice_Italia">qui</a>.
+                            Se volete aiutarmi allo sviluppo potete trovare tutto il codice <a target='_blank' rel="noopener noreferrer" href="https://github.com/RasterCrow/Boxoffice_Italia">qui</a>.
                             <br />
-                        Se invece avete bisogno di una mano, o per qualsiasi altro problema, potete contattarmi sui contatti disponibili sul mio <a target='_blank' href="https://rastercrow.me">sito</a>.
+                        Se invece avete bisogno di una mano, o per qualsiasi altro problema, potete contattarmi sui contatti disponibili sul mio <a target='_blank' rel="noopener noreferrer" href="https://rastercrow.me">sito</a>.
                     </p>
                 </Col>
 
