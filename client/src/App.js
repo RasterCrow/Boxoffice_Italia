@@ -10,6 +10,7 @@ import AllTimeboxoffice from "./components/AllTimeTable";
 import MyNavbar from "./components/Navbar";
 import MovieInfo from "./components/MovieInfo";
 import SearchPage from "./components/SearchPage"
+import HomePage from "./components/Home"
 import "./App.css";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
@@ -24,11 +25,8 @@ function App() {
         <Route path="/weekly" component={Weekendboxoffice} />
         <Route path="/yearly" component={Yearlyboxoffice} />
         <Route path="/all-time" component={AllTimeboxoffice} />
-        <Route exact path="/">
-          <h1> Home</h1>
-        </Route>
-        <Route path="/search" component={SearchPage}>
-        </Route>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/search" component={SearchPage} />
         <Route path="/movie/:id" component={MovieInfo}></Route>
       </Switch>
     </Router>

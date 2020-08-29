@@ -1,12 +1,14 @@
 body {
-  height: 100%;
-  margin: 0 !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html,
 body {
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: rgb(27, 26, 26);
 }
 

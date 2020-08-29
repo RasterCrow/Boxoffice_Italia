@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Image from 'react-bootstrap/Image'
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import './Navbar.css';
 
 function MyNavbar(props) {
@@ -33,22 +33,22 @@ function MyNavbar(props) {
             <Jumbotron className="jumbo" fluid>
                 <h1 id="title">BoxOffice Italia</h1>
             </Jumbotron>
-            <Navbar bg="primary" variant="dark">
-                <Navbar.Brand href="/"><Image src="/assets/home_icon_black.svg" /></Navbar.Brand>
+            <Navbar bg="primary" variant="dark" className="AllNavBar">
+                <Navbar.Brand href="/" className="navHome"><Image src="/assets/home_icon_black.svg" /></Navbar.Brand>
                 <Nav
                     className="mr-auto"
                     activeKey={location.pathname}
                 //onSelect={(selectedKey) => console.log(selectedKey)}
                 >
-                    <Nav.Link href="/daily">Daily </Nav.Link>
-                    <Nav.Link href="/weekly">Weekend </Nav.Link>
-                    <Nav.Link href="/yearly">Yearly</Nav.Link>
-                    <Nav.Link href="/all-time">All Time</Nav.Link>
+                    <Nav.Link href="/daily" className="navText">Daily </Nav.Link>
+                    <Nav.Link href="/weekly" className="navText">Weekend </Nav.Link>
+                    <Nav.Link href="/yearly" className="navText">Yearly</Nav.Link>
+                    <Nav.Link href="/all-time" className="navText">All Time</Nav.Link>
 
                 </Nav>
-                <Form inline onSubmit={handleSubmit}>
-                    <FormControl type="text" placeholder="Search a movie" className="mr-sm-2" onChange={handleChange} />
-                    <Button variant="outline-light" type="submit">Search</Button>
+                <Form inline onSubmit={handleSubmit} className="formSearch">
+                    <FormControl type="text" placeholder="Search a movie" className="formInput mr-sm-2" onChange={handleChange} />
+                    <Button variant="outline-light" type="submit" className="formButton">Search</Button>
                 </Form>
             </Navbar>
         </>

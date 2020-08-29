@@ -26,3 +26,40 @@
 #title Image {
   transform: scale(0.5);
 }
+
+.navText {
+  font-size: 1em;
+}
+.navHome {
+  width: 30px;
+}
+
+@media only screen and (max-width: 992px) {
+  #title {
+    margin: auto;
+    font-size: 3em;
+    cursor: pointer;
+  }
+  .jumbo {
+    height: 150px;
+    display: flex;
+  }
+  .navText {
+    font-size: 0.8em;
+  }
+  .AllNavBar {
+    height: 50px;
+  }
+  .navHome img {
+    height: 30px;
+  }
+  .formInput {
+    width: 100px !important;
+    height: 35px !important;
+  }
+
+  .formButton {
+    height: 35px !important;
+    margin-left: 10px;
+  }
+}
