@@ -64,7 +64,7 @@ const getMovieByTitle = (title) => {
 
     return request.then(response => response.data)
 }
-
+/*
 const deletePerson = (id) => {
     const request = axios.delete(`${baseUrl}/${id}`)
     return request
@@ -76,6 +76,7 @@ const updatePersonNumber = (id, personWithNewPhone) => {
     return request.then(response => response.data)
     //return request.then(response => response.data)
 }
+*/
 
 export default {
     getMovieList,

@@ -12,10 +12,11 @@ import BoxOfficeService from "../services/boxoffice.js";
 function MovieInfo(props) {
   let movieID = props.match.params.id
 
-  const [movieDataTMDB, setMovieDataTMDB] = useState(null)
+  const [movieDataTMDB, setMovieDataTMDB] = useState({})
 
-  const [movieDataMongo, setMovieDataMongo] = useState(null)
+  const [movieDataMongo, setMovieDataMongo] = useState({})
   //when it loads, it should retrieve data of the movie from the db, like title and such
+  const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
 
   const hook = () => {
     //Testing senza usare le API
@@ -45,12 +46,13 @@ function MovieInfo(props) {
       //after getting data from TMDB get box office data from my db
       BoxOfficeService.getMovieInfo(movieID).then((movie) => {
         setMovieDataMongo(movie);
+        setFetchedDataComplete(true)
       });
     } else {
       //Codice che dovrebbe girare normalmente
       BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
-
         setMovieDataTMDB(movie);
+        setFetchedDataComplete(true)
 
       });
 
@@ -58,16 +60,18 @@ function MovieInfo(props) {
       //after getting data from TMDB get box office data from my db
       BoxOfficeService.getMovieInfo(movieID).then((movie) => {
         setMovieDataMongo(movie);
+
       });
+
 
     }
   };
-  useEffect(hook, []);
+  useEffect(hook, [props.match.params.id]);
 
   return (
     <>
-      {movieDataTMDB !== null && movieDataMongo !== null ? (
-        movieDataTMDB.length > 0 ? (
+      {fetchedDataComplete ? (
+        movieDataTMDB.length !== 0 ? (
           <div>
             <Row >
               <Col lg={5} id="ImagePoster" style={{ marginLeft: "auto", marginRight: "auto" }}>
@@ -88,7 +92,7 @@ function MovieInfo(props) {
                       <Image src={"/assets/tomato.svg"}></Image>
                       {movieDataTMDB.vote_average}
                       <Image src={"/assets/language.svg"}></Image>
-                      {movieDataTMDB.original_language != undefined ? ("SCONOSCIUTO") : (movieDataTMDB.original_language).toUpperCase()}
+                      {(movieDataTMDB.original_language).toUpperCase()}
                       <Image src={"/assets/calendar_icon.svg"}></Image>
                       {movieDataTMDB.release_date}
                       <Image src={"/assets/incasso_icon.svg"}></Image>

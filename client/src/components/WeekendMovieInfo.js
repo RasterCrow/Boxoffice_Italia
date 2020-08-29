@@ -6,6 +6,7 @@ import "./BoxofficeList.css";
 import TableMovie from "./TableMovie";
 
 function WeekendMovieInfo(props) {
+    let incassoPrecedente = 1;
     const { movieID } = props;
     const [weekendList, setWeekendList] = useState([]);
 
@@ -40,9 +41,16 @@ function WeekendMovieInfo(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {weekendList.map((movie) => (
-                            <TableMovie key={movie.id} movieProps={movie} tableType="movieInfoDayWeekend" />
-                        ))}
+                        {weekendList.map((movie) => {
+                            let prec = incassoPrecedente
+                            incassoPrecedente = movie.incassoWeekend.toLocaleString(
+                                undefined, // leave undefined to use the browser's locale,
+                                // or use a string like 'en-US' to override it.
+                                { minimumFractionDigits: 0 }
+                            )
+                            return <TableMovie key={movie.id} movieProps={movie} tableType="movieInfoDayWeekend" prec={prec} />
+
+                        })}
                     </tbody>
                 </Table>
             ) : (

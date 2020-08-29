@@ -8,6 +8,7 @@ import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
 
 function DailyMovieInfo(props) {
+    let incassoPrecedente = 1;
     const { movieID } = props;
 
     const [dailyList, setDailyList] = useState([]);
@@ -17,7 +18,6 @@ function DailyMovieInfo(props) {
     const hook = () => {
         setFetchedDataComplete(false);
         BoxOfficeService.getMovieDailyBoxOfficeList(movieID).then(async (list) => {
-
             setDailyList(list);
         });
     };
@@ -34,7 +34,6 @@ function DailyMovieInfo(props) {
                     striped
                     bordered
                     hover
-
                     variant="dark"
                     size="sm"
                 >
@@ -48,9 +47,18 @@ function DailyMovieInfo(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {dailyList.map((movie) => (
-                            <TableMovie key={movie.id} movieProps={movie} tableType="movieInfoDay" />
-                        ))}
+
+                        {dailyList.map((movie) => {
+                            let prec = incassoPrecedente
+                            incassoPrecedente = movie.incasso.toLocaleString(
+                                undefined, // leave undefined to use the browser's locale,
+                                // or use a string like 'en-US' to override it.
+                                { minimumFractionDigits: 0 }
+                            )
+                            return <TableMovie key={movie.id} movieProps={movie} tableType="movieInfoDay" prec={prec} />
+                        })}
+
+
                     </tbody>
                 </Table>
             ) : (
