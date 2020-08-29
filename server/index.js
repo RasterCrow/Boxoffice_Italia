@@ -5,8 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const axios = require("axios");
-const { json } = require("express");
-var path = require('path')
+
 
 const app = express();
 
@@ -180,7 +179,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
       if (movie) {
 
         let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
-        console.log(titolo)
+        console.log("chiamata a /boxoffice/movies/tmdb/:id con titolo : " + titolo)
 
         //retrieve movie data and also movie info from tmdb
         //make axios call to tmdb
@@ -245,8 +244,17 @@ app.get("/boxoffice/dailyboxoffice", (req, res) => {
 app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
   console.log("chiamata a dailyBoxoffice/:day");
 
-  Dailyboxoffice_db.find({ giorno: req.params.day })
+  let date1 = new Date(req.params.day)
+  let date2 = new Date(req.params.day)
+  date2.setHours(24);
+  date2.setMinutes(0);
+  date2.setSeconds(0);
+  date2 = date2.toISOString().split('.')[0] + "Z"
+
+
+  Dailyboxoffice_db.find({ $or: [{ giorno: date2 }, { giorno: date1 }] })
     .then((daily_list) => {
+
       if (daily_list) {
 
         res.json(daily_list);
