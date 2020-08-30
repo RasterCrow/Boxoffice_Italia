@@ -170,6 +170,27 @@ app.get("/boxoffice/movies/:id", (req, res) => {
     });
 });
 
+//retrieves movie cast by id from tmdb, not local movieID.
+app.get("/boxoffice/movies/tmdb_actors/:id", (req, res) => {
+  let id = parseInt(req.params.id)
+  console.log("chiamata a /boxoffice/movies/tmdb_actors/:id con id : " + id)
+  axios
+    .get(`https://api.themoviedb.org/3/movie/${id}/credits?`, {
+      params: {
+        api_key: TMDB_API_KEY,
+        language: "it-IT",
+        movie_id: id
+      },
+    })
+    .then((axios_res) => {
+      //gets json with cast and crew
+      res.json(axios_res.data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 //retrieves data from tmdb. it has movie id, but it actually searches by name of that movie id
 app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
   let id = req.params.id;
@@ -196,7 +217,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
             //sort the result by popularity
 
             axios_res.data.results.sort(GetSortOrder("popularity"));
-
+            console.log(axios_res.data.results[0])
             //returns the most popular one
             res.json(axios_res.data.results[0]);
           })
@@ -213,6 +234,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
     });
 });
 
+//orders data by value prop
 function GetSortOrder(prop) {
   return function (a, b) {
     if (a[prop] < b[prop]) {

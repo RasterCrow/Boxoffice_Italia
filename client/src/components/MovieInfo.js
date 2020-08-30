@@ -2,84 +2,109 @@ import React, { useState, useEffect } from "react";
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
+import Card from 'react-bootstrap/Card'
 import DailyMovieInfo from "./DailyMovieInfo";
 import WeekendMovieInfo from "./WeekendMovieInfo";
 import './MovieInfo.css';
 
 import BoxOfficeService from "../services/boxoffice.js";
+import { Link } from "react-router-dom";
+
+
+function CastCard({ person }) {
+  return (
+    <>
+      <Card className="CastCard" style={{ width: '5rem' }}>
+        {person.profile_path === null ? (
+          <Card.Img className="CastCardImage" variant="top" src={"/assets/default_avatar.svg"} style={{ height: "135px", width: "90px", backgroundColor: "rgb(192, 192, 192)" }} />
+        ) : (
+            <Card.Img className="CastCardImage" variant="top" src={"https://image.tmdb.org/t/p/original" + person.profile_path} />
+          )
+        }
+        <Card.Body>
+          <Card.Title>
+            {person.name}
+          </Card.Title>
+          <Card.Text>
+            {person.character}
+          </Card.Text>
+        </Card.Body>
+      </Card>
+
+    </>
+  )
+}
+
+
+function CastList({ movieCast, movieId }) {
+  console.log(movieCast)
+
+  return (
+    <>
+      {/* Lista degli attori */}
+
+      {
+        movieCast.slice(0, 8).map((castMember) => (
+          <CastCard person={castMember} type="cast" key={castMember.cast_id} />
+        ))
+      }
+      <Card id="MoreCastCard">
+        <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/movie/${movieId}/cast`}><Card.Body>View more...</Card.Body></a>
+      </Card>
+    </>
+  )
+}
 
 function MovieInfo(props) {
   let movieID = props.match.params.id
 
   const [movieDataTMDB, setMovieDataTMDB] = useState({})
+  const [movieCast, setMovieCast] = useState({})
 
   const [movieDataMongo, setMovieDataMongo] = useState({})
   //when it loads, it should retrieve data of the movie from the db, like title and such
   const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
 
   const hook = () => {
-    //Testing senza usare le API
-    if (movieID === "5f1c12c36e1da74428c04315") {
+    //Codice che dovrebbe girare normalmente
+    BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
+      setMovieDataTMDB(movie);
+      return movie
 
-      let movieInfo = {
-        "popularity": 38.099,
-        "id": 515001,
-        "video": false,
-        "vote_count": 4360,
-        "vote_average": 8.1,
-        "title": "Jojo Rabbit",
-        "release_date": "2019-10-18",
-        "original_language": "en",
-        "original_title": "Jojo Rabbit",
-        "genre_ids": [
-          35,
-          10752,
-          18
-        ],
-        "backdrop_path": "/agoBZfL1q5G79SD0npArSlJn8BH.jpg",
-        "adult": false,
-        "overview": "Jojo, un bambino cresciuto dalla sola madre, ha come unico alleato il suo amico immaginario Adolf Hitler. Il suo ingenuo patriottismo viene però messo alla prova quando incontra una ragazzina che stravolge le sue convinzioni sul mondo, costringendolo ad affrontare le sue paure più grandi.",
-        "poster_path": "/nYLhpz6iASM06q1i4C1QoUNGDk8.jpg"
-      }
-      setMovieDataTMDB(movieInfo);
-      //after getting data from TMDB get box office data from my db
-      BoxOfficeService.getMovieInfo(movieID).then((movie) => {
-        setMovieDataMongo(movie);
-        setFetchedDataComplete(true)
-      });
-    } else {
-      //Codice che dovrebbe girare normalmente
-      BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
-        setMovieDataTMDB(movie);
-        setFetchedDataComplete(true)
-
-      });
-
-
-      //after getting data from TMDB get box office data from my db
-      BoxOfficeService.getMovieInfo(movieID).then((movie) => {
-        setMovieDataMongo(movie);
-
-      });
-
-
-    }
+    })
+      .then((movie) => {
+        BoxOfficeService.getActorsByMovieID(movie.id).then((cast) => {
+          console.log(cast)
+          setMovieCast(cast);
+        })
+          .then(() => {
+            //after getting data from TMDB get box office data from my db
+            BoxOfficeService.getMovieInfo(movieID).then((movie) => {
+              setMovieDataMongo(movie);
+              setFetchedDataComplete(true)
+            });
+          })
+      })
   };
   useEffect(hook, [props.match.params.id]);
+
 
   return (
     <>
       {fetchedDataComplete ? (
         movieDataTMDB.length !== 0 ? (
-          <div>
-            <Row >
-              <Col lg={5} id="ImagePoster" style={{ marginLeft: "auto", marginRight: "auto" }}>
-                <div className="sticky">
+          <>
+            <Row id="RowMovieData">
+              <Col lg={4} >
+                <Row id="ImagePoster" className="sticky" >
                   <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
-                </div>
+                </Row>
+                <h2 className="TitoloCentrato stickyCastTitolo"  >Cast:</h2>
+                <Row id="MovieCastSticky" className="stickyCast" >
+                  <CastList movieCast={movieCast.cast} movieId={movieDataTMDB.id} />
+                </Row>
               </Col>
-              <Col lg={7} id="MovieInfo" style={{ margin: "auto" }}>
+              <Col lg={8} id="MovieInfo" style={{ margin: "auto" }}>
                 <div className="sticky" id="MovieInfoSticky">
                   <Row >
                     <div id="MovieTitle">
@@ -87,10 +112,11 @@ function MovieInfo(props) {
                     </div>
                   </Row>
 
-                  <Row id="RowMovieRandomInfo">
+                  <Row>
                     <div id="MovieRandomInfo">
                       <Image src={"/assets/tomato.svg"}></Image>
                       {movieDataTMDB.vote_average}
+
                       <Image src={"/assets/language.svg"}></Image>
                       {(movieDataTMDB.original_language).toUpperCase()}
                       <Image src={"/assets/calendar_icon.svg"}></Image>
@@ -125,7 +151,7 @@ function MovieInfo(props) {
               </Col>
             </Row>
 
-          </div>
+          </>
         ) :
           (
             <>

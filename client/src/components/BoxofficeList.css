@@ -1,10 +1,23 @@
 #tabellaDaily {
   margin-top: 50px !important;
   margin-bottom: 50px !important;
+  width: 90%;
   margin: auto;
-  max-width: 80%;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
+@media only screen and (max-width: 767px) {
+  #tabellaDaily {
+    margin-top: 50px !important;
+    margin-bottom: 50px !important;
+    width: 90%;
+    margin: auto;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
 #titolo_list h1 {
   font-size: 2vw;
 }
@@ -18,12 +31,6 @@
   margin-top: 30px !important;
   margin-left: 50px;
   margin-right: 50px;
-}
-
-.sticky {
-  top: 0;
-  position: -webkit-sticky;
-  position: sticky;
 }
 
 tr {

@@ -48,7 +48,7 @@ function MyNavbar(props) {
                 </Nav>
                 <Form inline onSubmit={handleSubmit} className="formSearch">
                     <FormControl type="text" placeholder="Search a movie" className="formInput mr-sm-2" onChange={handleChange} />
-                    <Button variant="outline-light" type="submit" className="formButton">Search</Button>
+                    <Button variant="outline-light" type="submit" className="formButton" ><Image src="/assets/search_icon.svg" /></Button>
                 </Form>
             </Navbar>
         </>

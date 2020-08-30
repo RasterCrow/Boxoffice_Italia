@@ -64,6 +64,12 @@ const getMovieByTitle = (title) => {
 
     return request.then(response => response.data)
 }
+
+//The ID is the one from TMDB, not from my local DB.
+const getActorsByMovieID = (IdTMDB) => {
+    const request = axios.get(`${baseUrl}/movies/tmdb_actors/${IdTMDB}`)
+    return request.then(response => response.data)
+}
 /*
 const deletePerson = (id) => {
     const request = axios.delete(`${baseUrl}/${id}`)
@@ -88,5 +94,6 @@ export default {
     getMovieInfoTMDB,
     getMovieDailyBoxOfficeList,
     getMovieWeekendBoxOfficeList,
-    getMovieByTitle
+    getMovieByTitle,
+    getActorsByMovieID
 }
