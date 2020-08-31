@@ -53,11 +53,11 @@ function Home() {
         <>
             <Row style={{ maxHeight: "100%", Height: "100%", marginRight: "0px" }}>
                 {/* Famous movies */}
-                <Col sm={6} style={{ paddingRight: "0px" }} >
+                <Col sm={4} style={{ paddingRight: "0px" }} >
                     <CarouselMovies />
                 </Col>
                 {/*Header for the homepage */}
-                <Col sm={6} style={{ padding: "50px" }}>
+                <Col sm={8} style={{ padding: "50px" }}>
                     <h2 style={{ margin: "auto", marginTop: "20px" }}>Benvenuto su BoxOffice Italia</h2>
                     <br />
                     <p>

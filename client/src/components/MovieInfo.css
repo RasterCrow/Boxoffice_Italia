@@ -13,6 +13,7 @@
 #ImagePoster img {
   margin: auto;
   height: 450px;
+  max-width: 100%;
 }
 
 #ImagePoster {

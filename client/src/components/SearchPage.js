@@ -22,14 +22,17 @@ function SearchPage(props) {
     return (
         <>
             {fetchedDataComplete ? (
-                <div id='searchZone' >
-                    <h1>Film cercato : {movie}</h1>
-                    <ListGroup >
-                        {similarMovieList.map((movieFound) => (
-                            <MovieCard key={movieFound.movieId} movieProps={movieFound} />
-                        ))}
-                    </ListGroup>
-                </div>
+                <>
+                    <h1 id="titoloList">Film cercato : {movie}</h1>
+                    <div id='searchZone' >
+
+                        <ListGroup >
+                            {similarMovieList.map((movieFound) => (
+                                <MovieCard key={movieFound.movieId} movieProps={movieFound} />
+                            ))}
+                        </ListGroup>
+                    </div>
+                </>
             ) : (
                     <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
                 )

@@ -8,7 +8,6 @@ import WeekendMovieInfo from "./WeekendMovieInfo";
 import './MovieInfo.css';
 
 import BoxOfficeService from "../services/boxoffice.js";
-import { Link } from "react-router-dom";
 
 
 function CastCard({ person }) {

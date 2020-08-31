@@ -7,7 +7,7 @@
   white-space: nowrap;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 769px) {
   #tabellaDaily {
     margin-top: 50px !important;
     margin-bottom: 50px !important;
@@ -18,8 +18,14 @@
     white-space: nowrap;
   }
 }
+#titolo_list {
+  font-size: max(0.7rem, 1.5vw);
+}
+.react-date-picker {
+  font-size: max(0.7rem, 0.8vw) !important;
+}
 #titolo_list h1 {
-  font-size: 2vw;
+  font-size: max(0.7rem, 1.5vw);
 }
 
 #titolo_list {
@@ -28,11 +34,33 @@
 }
 
 #buttonRow {
-  margin-top: 30px !important;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-top: 20px !important;
+  margin-right: 2vw !important;
+  margin-left: 2vw !important;
+}
+.btn {
+  min-height: 50px;
+  width: min(20vw, 100px);
 }
 
+@media only screen and (max-width: 426px) {
+  #buttonRow button {
+    font-size: 13px;
+  }
+  .btn {
+    min-height: 30px;
+    width: min(20vw, 100px);
+  }
+}
+@media only screen and (max-width: 320px) {
+  #buttonRow button {
+    font-size: 10px;
+  }
+  .btn {
+    min-height: 30px;
+    width: min(20vw, 100px);
+  }
+}
 tr {
   cursor: pointer;
 }
@@ -42,4 +70,84 @@ td {
 }
 thead {
   text-align: center;
+}
+
+@media only screen and (max-width: 426px) {
+  /* Force table to not be like tables anymore */
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    font-size: 10px;
+    text-align: right;
+  }
+
+  td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+
+    top: 12px;
+    left: -60px;
+    width: 45%;
+    margin-right: 20px;
+    white-space: nowrap;
+  }
+
+  td:nth-of-type(1):before {
+    content: "Posizione";
+    font-size: 12px;
+    left: -50px;
+  }
+  td:nth-of-type(2):before {
+    content: "Titolo";
+    font-size: 12px;
+  }
+  td:nth-of-type(3):before {
+    content: "Data Uscita";
+    font-size: 12px;
+    left: -42px;
+  }
+  td:nth-of-type(4):before {
+    content: "Incasso";
+    font-size: 12px;
+    left: -55px;
+  }
+  td:nth-of-type(5):before {
+    content: "Presenze";
+    font-size: 12px;
+    left: -50px;
+  }
+  .weekendTotaleAlGiorno:before {
+    content: "Incasso ad oggi";
+    font-size: 12px;
+    left: -32px;
+  }
+  .weekendNumero:before {
+    content: "Weekend in classifica";
+    font-size: 12px;
+    left: -10px;
+  }
 }

@@ -1,18 +1,36 @@
 #searchZone {
-  width: 500px;
+  width: 80vw;
   margin: 0 auto;
   line-height: 1.4em;
   text-align: center;
 }
-#searchZone h1 {
+#titoloList {
   margin-top: 30px;
   margin-bottom: 40px;
+  text-align: center;
+  font-size: max(1.5rem, 2vw);
 }
 
-#MovieItem {
+.MovieItem {
+  margin: auto;
+  max-width: 30vw;
+  min-width: 30vw;
+  width: 30vw;
   color: black;
 }
-#MovieItem:hover {
+@media only screen and (max-width: 426px) {
+  #titoloList {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .MovieItem {
+    max-width: 80vw;
+    min-width: 80vw;
+    width: 80vw;
+  }
+}
+
+.MovieItem:hover {
   color: white;
   background-color: rgb(38, 120, 228);
   cursor: pointer;

@@ -19,6 +19,7 @@ function MyNavbar(props) {
     }
 
     const handleSubmit = (event) => {
+
         history.push({
             pathname: '/search',
             search: `?${movieToSearch}`,
@@ -28,28 +29,33 @@ function MyNavbar(props) {
         event.preventDefault();
     }
 
+
     return (
         <>
             <Jumbotron className="jumbo" fluid>
                 <h1 id="title">BoxOffice Italia</h1>
             </Jumbotron>
-            <Navbar bg="primary" variant="dark" className="AllNavBar">
-                <Navbar.Brand href="/" className="navHome"><Image src="/assets/home_icon_black.svg" /></Navbar.Brand>
-                <Nav
-                    className="mr-auto"
-                    activeKey={location.pathname}
-                //onSelect={(selectedKey) => console.log(selectedKey)}
-                >
-                    <Nav.Link href="/daily" className="navText">Daily </Nav.Link>
-                    <Nav.Link href="/weekly" className="navText">Weekend </Nav.Link>
-                    <Nav.Link href="/yearly" className="navText">Yearly</Nav.Link>
-                    <Nav.Link href="/all-time" className="navText">All Time</Nav.Link>
+            <Navbar bg="primary" variant="dark" className="AllNavBar" expand="sm">
 
-                </Nav>
-                <Form inline onSubmit={handleSubmit} className="formSearch">
-                    <FormControl type="text" placeholder="Search a movie" className="formInput mr-sm-2" onChange={handleChange} />
-                    <Button variant="outline-light" type="submit" className="formButton" ><Image src="/assets/search_icon.svg" /></Button>
-                </Form>
+                <Navbar.Brand href="/" className="navHome"><Image src="/assets/home_icon_black.svg" /></Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav" >
+                    <Nav
+                        className="mr-auto"
+                        activeKey={location.pathname}
+                    //onSelect={(selectedKey) => console.log(selectedKey)}
+                    >
+                        <Nav.Link href="/daily" className="navText">Daily </Nav.Link>
+                        <Nav.Link href="/weekly" className="navText">Weekend </Nav.Link>
+                        <Nav.Link href="/yearly" className="navText">Yearly</Nav.Link>
+                        <Nav.Link href="/all-time" className="navText">All Time</Nav.Link>
+
+                    </Nav>
+                    <Form inline onSubmit={handleSubmit} className="formSearch" aria-controls="basic-navbar-nav" >
+                        <FormControl type="text" placeholder="Search a movie" className="formInput mr-sm-2" onChange={handleChange} />
+                        <Button variant="outline-light" type="submit" className="formButton" ><Image src="/assets/search_icon.svg" /></Button>
+                    </Form>
+                </Navbar.Collapse>
             </Navbar>
         </>
     )

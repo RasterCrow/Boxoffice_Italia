@@ -11,7 +11,7 @@ function MovieCard({ movieProps }) {
     const history = useHistory();
     return (
 
-        <ListGroup.Item id="MovieItem" onClick={(event) => history.push(`/movie/${movieProps.id}`)}>
+        <ListGroup.Item className="MovieItem" onClick={(event) => history.push(`/movie/${movieProps.id}`)}>
             {movieProps.titolo}
         </ListGroup.Item>
 
