@@ -36,15 +36,13 @@ function CastCard({ person }) {
 
 
 function CastList({ movieCast, movieId }) {
-  console.log(movieCast)
-
   return (
     <>
       {/* Lista degli attori */}
 
       {
         movieCast.slice(0, 8).map((castMember) => (
-          <CastCard person={castMember} type="cast" key={castMember.cast_id} />
+          <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/person/${castMember.id}`} key={castMember.cast_id}><CastCard person={castMember} type="cast" /></a>
         ))
       }
       <Card id="MoreCastCard">
@@ -73,7 +71,7 @@ function MovieInfo(props) {
     })
       .then((movie) => {
         BoxOfficeService.getActorsByMovieID(movie.id).then((cast) => {
-          console.log(cast)
+
           setMovieCast(cast);
         })
           .then(() => {

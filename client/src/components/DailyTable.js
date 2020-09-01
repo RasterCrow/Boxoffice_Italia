@@ -10,22 +10,28 @@ import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
 
 function Dailyboxoffice(props) {
-
   let date
-
   let stateDate = props.location.state
-  console.log(stateDate)
+
   if (stateDate !== undefined) {
     date = stateDate.giorno
+    window.history.replaceState(null, '')
   } else {
     date = new Date();
     date.setDate(date.getDate() - 1);
   }
-  //TODAY DATE
+  //DAY RECEIVED DATE
   let month = ("0" + (date.getMonth() + 1)).slice(-2);
   let giorno = ("0" + date.getDate()).slice(-2);
   let full_year = date.getFullYear();
   let date_format = full_year + "-" + month + "-" + giorno;
+  //TODAY DATE ( used for buttons)
+  let date_today = new Date();
+  date_today.setDate(date_today.getDate() - 1);
+  let month_today = ("0" + (date_today.getMonth() + 1)).slice(-2);
+  let giorno_today = ("0" + date_today.getDate()).slice(-2);
+  let full_year_today = date_today.getFullYear();
+  let date_format_today = full_year_today + "-" + month_today + "-" + giorno_today;
 
   //day sarebbe il giorno precedente a questo, essendo il boxoffice sempre dei giorni precedenti
   const [day, setDay] = useState(date_format);
@@ -38,6 +44,7 @@ function Dailyboxoffice(props) {
 
     BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
       setDailyList(list);
+
       setFetchedDataComplete(true);
     });
 
@@ -67,9 +74,9 @@ function Dailyboxoffice(props) {
     let tomorrow = new Date(day);
     //check if the last checked date is today
     if (
-      tomorrow.getDate() === date.getDate() &&
-      tomorrow.getMonth() === date.getMonth() &&
-      tomorrow.getFullYear() === date.getFullYear()
+      tomorrow.getDate() === date_today.getDate() &&
+      tomorrow.getMonth() === date_today.getMonth() &&
+      tomorrow.getFullYear() === date_today.getFullYear()
     ) {
       //I don't update date anymore.
       //maybe show gray button
@@ -102,12 +109,12 @@ function Dailyboxoffice(props) {
           <h1>Incasso del giorno {day}</h1>
           <DatePicker
             clearIcon={null}
-            maxDate={new Date(date_format)}
+            maxDate={new Date(date_format_today)}
             onChange={handleChangePickerDate}
             value={new Date(day)}
           />
         </div>
-        {day === date_format ? (
+        {day === date_format_today ? (
           <Button value="day" onClick={handleButtonSuccessivo} disabled>
             Successivo
           </Button>
@@ -120,6 +127,7 @@ function Dailyboxoffice(props) {
       {!fetchedDataComplete ? (
         <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
       ) : dailyList.length > 0 ? (
+
         <Table
           id="tabellaDaily"
           striped
@@ -138,6 +146,7 @@ function Dailyboxoffice(props) {
               <th>Incasso ad oggi</th>
             </tr>
           </thead>
+
           <tbody>
             {dailyList.map((movie) => (
               <TableMovie key={movie.movie} movieProps={movie} tableType="day" />

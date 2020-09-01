@@ -40,6 +40,7 @@
 }
 .btn {
   min-height: 50px;
+  max-height: 50px;
   width: min(20vw, 100px);
 }
 

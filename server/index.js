@@ -9,6 +9,10 @@ const axios = require("axios");
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://boxofficeitalia-dac32.web.app/');
+  next();
+});
 
 
 // Read the host address and the port from the environment
@@ -217,7 +221,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
             //sort the result by popularity
 
             axios_res.data.results.sort(GetSortOrder("popularity"));
-            console.log(axios_res.data.results[0])
+            //console.log(axios_res.data.results[0])
             //returns the most popular one
             res.json(axios_res.data.results[0]);
           })
@@ -268,11 +272,14 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
 
   let date1 = new Date(req.params.day)
   let date2 = new Date(req.params.day)
+  /*IMPORTANT
+  In production setHours NEEDS to be 23 .
+  I don't know why but locally to get the hour 23 I need to set it to 24
+  */
   date2.setHours(24);
   date2.setMinutes(0);
   date2.setSeconds(0);
   date2 = date2.toISOString().split('.')[0] + "Z"
-
 
   Dailyboxoffice_db.find({ $or: [{ giorno: date2 }, { giorno: date1 }] })
     .then((daily_list) => {

@@ -14,7 +14,6 @@ function Weekendboxoffice(props) {
   //if I have a weekend date in the state ( I clicked on the MovieInfo Table on a specific date ) I load that table, otherwise it loads last weekend
   let weekend_first
   let stateDate = props.location.state
-  console.log(stateDate)
   if (stateDate !== undefined) {
     weekend_first = stateDate.weekend
   } else {
