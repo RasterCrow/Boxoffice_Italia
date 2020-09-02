@@ -13,7 +13,10 @@ function MyNavbar(props) {
     const { location } = props;
     const [movieToSearch, setMovieToSearch] = useState("")
     const history = useHistory();
-
+    console.log(window.location.pathname)
+    //background style
+    let backgroundImageArray = ["/assets/banner1.png", "/assets/banner4.jpg", "/assets/banner5.jpg"]
+    let randomImage = backgroundImageArray[Math.floor(Math.random() * backgroundImageArray.length)]
     const handleChange = (event) => {
         setMovieToSearch(event.target.value);
     }
@@ -32,9 +35,18 @@ function MyNavbar(props) {
 
     return (
         <>
-            <Jumbotron className="jumbo" fluid>
-                <h1 id="title">BoxOffice Italia</h1>
-            </Jumbotron>
+            {
+                window.location.pathname === "/" ? (
+                    <Jumbotron className="jumboHome" fluid>
+                        <h1 id="title">BoxOffice Italia</h1>
+                    </Jumbotron>
+                ) :
+                    (
+                        <Jumbotron className="jumbo" fluid style={{ backgroundImage: `url(${randomImage})` }} >
+                            <h1 id="title">BoxOffice Italia</h1>
+                        </Jumbotron>
+                    )
+            }
             <Navbar bg="primary" variant="dark" className="AllNavBar" expand="sm">
 
                 <Navbar.Brand href="/" className="navHome"><Image src="/assets/home_icon_black.svg" /></Navbar.Brand>

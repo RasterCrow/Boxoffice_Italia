@@ -42,11 +42,11 @@ function CastList({ movieCast, movieId }) {
 
       {
         movieCast.slice(0, 8).map((castMember) => (
-          <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/person/${castMember.id}`} key={castMember.cast_id}><CastCard person={castMember} type="cast" /></a>
+          <a target="_blank" rel="noopener noreferrer" title="Portami alla pagina dell'attore" href={`https://www.themoviedb.org/person/${castMember.id}`} key={castMember.cast_id}><CastCard person={castMember} type="cast" /></a>
         ))
       }
       <Card id="MoreCastCard">
-        <a target="_blank" rel="noopener noreferrer" href={`https://www.themoviedb.org/movie/${movieId}/cast`}><Card.Body>View more...</Card.Body></a>
+        <a target="_blank" rel="noopener noreferrer" title="Portami alla pagina con tutto il cast" href={`https://www.themoviedb.org/movie/${movieId}/cast`}><Card.Body>View more...</Card.Body></a>
       </Card>
     </>
   )
@@ -93,8 +93,11 @@ function MovieInfo(props) {
           <>
             <Row id="RowMovieData">
               <Col lg={4} >
+
                 <Row id="ImagePoster" className="sticky" >
-                  <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
+                  <a id="ImgLinkFilm" target="_blank" rel="noopener noreferrer" title="Portami alla pagina del film" href={`https://www.themoviedb.org/movie/${movieDataTMDB.id}?language=it-IT`}>
+                    <Image src={"https://image.tmdb.org/t/p/w300" + movieDataTMDB.poster_path}></Image>
+                  </a>
                 </Row>
                 <h2 className="TitoloCentrato stickyCastTitolo"  >Cast:</h2>
                 <Row id="MovieCastSticky" className="stickyCast" >

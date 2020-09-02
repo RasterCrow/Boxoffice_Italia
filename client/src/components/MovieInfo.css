@@ -1,3 +1,25 @@
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(207, 205, 205);
+  scrollbar-width: thin;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 #RowMovieData {
   margin-right: 0px !important;
   margin-left: 0px !important;
@@ -10,10 +32,14 @@
   font-size: min(9vw, 50px);
 }
 
-#ImagePoster img {
+#ImagePoster a {
   margin: auto;
   height: 450px;
   max-width: 100%;
+  transition: transform 0.2s; /* Animation */
+}
+#ImagePoster a img:hover {
+  transform: scale(1.05);
 }
 
 #ImagePoster {
@@ -21,7 +47,13 @@
   width: 100%;
   margin: auto;
   max-width: 100%;
+  margin-bottom: 60px !important;
 }
+
+.ImgLinkFilm {
+  text-decoration: none;
+}
+
 .TitoloCentrato {
   margin-top: 40px;
 
@@ -72,6 +104,9 @@
   overflow-y: hidden;
   padding-left: 10px;
 }
+#MovieCastSticky a {
+  text-decoration: none;
+}
 
 .CastCard {
   flex: 0 0 auto;
@@ -81,7 +116,13 @@
   margin-bottom: 5px;
   width: 90px !important;
   height: 215px !important;
+  transition: transform 0.2s;
 }
+
+.CastCard:hover {
+  transform: scale(1.1);
+}
+
 .CastCard div {
   padding: 3px;
   z-index: 1;
@@ -151,13 +192,13 @@
   }
 
   .stickyCast {
-    top: 563px;
+    top: 640px;
     position: sticky;
     position: -webkit-sticky;
   }
 
   .stickyCastTitolo {
-    top: 525px;
+    top: 580px;
     position: sticky;
     position: -webkit-sticky;
   }
