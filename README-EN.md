@@ -36,6 +36,8 @@ I like to speculate and follow these types of data and since there are several s
 
 Most sites in Italy only take into account the last two weeks, so I created BoxOffice Italy to take into account the usual data.
 
+I originally had a more basic version developed in PHP and hosted with Apache on my Raspberry. But I wanted to improve my skills as a WebDev and I decided to create a more up to date and modern version in terms of technologies.
+
 For the moment it is only available for my private use, as I do not want to publicly share the boxoffice data that I save .
 
 However, a demo version is available on [boxoffice.rastercrow.me] to get an idea of the project.
