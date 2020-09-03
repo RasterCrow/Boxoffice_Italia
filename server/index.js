@@ -219,9 +219,9 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
           })
           .then((axios_res) => {
             //sort the result by popularity
-
+            //console.log(axios_res)
             axios_res.data.results.sort(GetSortOrder("popularity"));
-            //console.log(axios_res.data.results[0])
+
             //returns the most popular one
             res.json(axios_res.data.results[0]);
           })

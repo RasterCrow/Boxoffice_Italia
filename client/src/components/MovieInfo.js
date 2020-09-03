@@ -67,20 +67,27 @@ function MovieInfo(props) {
     BoxOfficeService.getMovieInfoTMDB(movieID).then((movie) => {
       setMovieDataTMDB(movie);
       return movie
-
     })
       .then((movie) => {
-        BoxOfficeService.getActorsByMovieID(movie.id).then((cast) => {
+        if (movie.id !== undefined) {
+          BoxOfficeService.getActorsByMovieID(movie.id).then((cast) => {
 
-          setMovieCast(cast);
-        })
-          .then(() => {
-            //after getting data from TMDB get box office data from my db
-            BoxOfficeService.getMovieInfo(movieID).then((movie) => {
-              setMovieDataMongo(movie);
-              setFetchedDataComplete(true)
-            });
+            setMovieCast(cast);
           })
+            .then(() => {
+              //after getting data from TMDB get box office data from my db
+              BoxOfficeService.getMovieInfo(movieID).then((movie) => {
+                setMovieDataMongo(movie);
+                setFetchedDataComplete(true)
+              });
+            })
+        } else {
+          //even if I can't get data from tmdb I still get data from my mongo db
+          BoxOfficeService.getMovieInfo(movieID).then((movie) => {
+            setMovieDataMongo(movie);
+            setFetchedDataComplete(true)
+          });
+        }
       })
   };
   useEffect(hook, [props.match.params.id]);
@@ -89,7 +96,7 @@ function MovieInfo(props) {
   return (
     <>
       {fetchedDataComplete ? (
-        movieDataTMDB.length !== 0 ? (
+        movieDataTMDB.length !== 0 && movieCast.length !== 0 ? (
           <>
             <Row id="RowMovieData">
               <Col lg={4} >

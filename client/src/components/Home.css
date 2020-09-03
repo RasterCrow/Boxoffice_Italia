@@ -1,8 +1,8 @@
 .carouselImage {
-  width: 82%;
+  width: 100%;
   min-width: 300px;
   min-height: 800px;
-  height: 71.5vh;
+  height: 95vh;
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

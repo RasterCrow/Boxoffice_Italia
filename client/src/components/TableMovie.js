@@ -229,7 +229,7 @@ function TableMovie(props) {
                 { minimumFractionDigits: 0 }
               )}
             </td>
-            <td>
+            <td className="weekendTotaleAlGiorno">
               {movieProps.incassoTotaleAlGiorno.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
@@ -322,7 +322,7 @@ function TableMovie(props) {
                 { minimumFractionDigits: 0 }
               )}
             </td>
-            <td>{movieProps.weekendNumero}</td>
+            <td className="weekendNumero">{movieProps.weekendNumero}</td>
           </tr>
         ) : (
             //maybe show loading icon

@@ -13,7 +13,7 @@ function MyNavbar(props) {
     const { location } = props;
     const [movieToSearch, setMovieToSearch] = useState("")
     const history = useHistory();
-    console.log(window.location.pathname)
+    //console.log(window.location.pathname)
     //background style
     let backgroundImageArray = ["/assets/banner1.png", "/assets/banner4.jpg", "/assets/banner5.jpg"]
     let randomImage = backgroundImageArray[Math.floor(Math.random() * backgroundImageArray.length)]

@@ -7,7 +7,7 @@
   white-space: nowrap;
 }
 
-@media only screen and (max-width: 769px) {
+@media only screen and (max-width: 425px) {
   #tabellaDaily {
     margin-top: 50px !important;
     margin-bottom: 50px !important;
@@ -15,9 +15,11 @@
     margin: auto;
     display: block;
     overflow-x: auto;
+    overflow-y: hidden;
     white-space: nowrap;
   }
 }
+
 #titolo_list {
   font-size: max(0.7rem, 1.5vw);
 }
@@ -110,7 +112,6 @@ thead {
     position: absolute;
     /* Top/left values mimic padding */
 
-    top: 12px;
     left: -60px;
     width: 45%;
     margin-right: 20px;

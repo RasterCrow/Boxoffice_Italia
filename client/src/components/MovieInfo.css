@@ -42,8 +42,8 @@
   transform: scale(1.05);
 }
 
-#ImagePoster {
-  padding-top: 60px;
+#ImagePoster img {
+  padding-top: 30px;
   width: 100%;
   margin: auto;
   max-width: 100%;
@@ -176,6 +176,8 @@
 #MovieInfoSticky div {
   margin-top: 20px;
   margin-bottom: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 #MovieInfoSticky {
