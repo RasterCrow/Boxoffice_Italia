@@ -23,6 +23,8 @@ Mi piace speculare e seguire questi tipi di dati e siccome all'estero sono dispo
 
 La maggior parte dei siti in italia tengono conto soltanto delle ultime due settimane, cosi ho ideato BoxOffice Italia per tenere conto dei dati di sempre.
 
+Inizialmente avevo una versione più basilare sviluppata in PHP e hostata su con Apache sul mio Raspberry. Volevo migliorare però le mie skill da WebDev ho deciso di creare una versione più aggiornata e moderna a livello di tecnologie.
+
 Per il momento è disponibile solo per uso mio privato, in quanto non voglio condividere i dati del boxoffice che salvo pubblicamente.
 
 E' comunque disponibile una versione demo su [boxoffice.rastercrow.me] per farsi una idea del progetto.
