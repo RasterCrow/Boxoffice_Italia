@@ -10,7 +10,7 @@ const axios = require("axios");
 const app = express();
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://boxofficeitalia-dac32.web.app/');
+  res.header('Access-Control-Allow-Origin', 'https://boxofficeitalia.rastercrow.me/');
   next();
 });
 
