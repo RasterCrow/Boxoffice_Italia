@@ -3,16 +3,16 @@
   <img height="400" src="https://i.imgur.com/V4BOjFa.jpg" />
 </p>
 
-Source code of BoxOffice Italia, WebApp that I developed to facilitate the viewing of the box office earnings of movies coming out in Italian cinemas.
+Source code of BoxOffice Italia, WebApp that I developed to make make it eassier to checek the box office earnings of movies coming out in Italian cinemas.
 
-The WebApp was made for private use only, but it's possible to use a demo version at [boxoffice.rastercrow.me] (https://boxoffice.rastercrow.me/).
+The Webapp was made for private use only, but i'm working on a demo version.
 
 # Structure
 The client side of BoxOffice Italia has been developed in React Framework, hosted on Firebase Hosting.
 
 On the server side BoxOffice Italia was developed with Express, hosted on Heroku.
 
-BoxOffice data is made with MongoDB NOSQL DB, later hosted on MongoDB Atlas.
+BoxOffice data is saved with MongoDB, hosted on MongoDB Atlas.
 
 Data retrieval is handled through a script hosted on AWS Lambda, scheduled with AWS Event Bridge to run daily.
 
@@ -23,26 +23,24 @@ Furthermore, BoxOffice Italia makes use of the APIs offered by TMDB to retrieve 
   <img height = "400" src = "https://i.imgur.com/DEnJkwK.jpg" />
 </p>
 
-BoxOffice Italia allows users to quickly but still accurately view the earnings of movies coming out in cinemas in Italy, similar to BoxOffice Mojo or The Numbers.
+BoxOffice Italia allows users to quickly and accurately view the revenues of movies coming out in cinemas in Italy, similar to BoxOffice Mojo or The Numbers.
 
 This data can be viewed by day, weekend and year or even by specific film.
 
 There are also more advanced information like the difference in percentage of earnings day by day and alerts for newly released films.
 
-Not all receipts are available, as I only started taking these into account at the end of 2019; However, there is a section with the highest revenues ever.
+Not all the revenues are available, as I only started taking these into account at the end of 2019; However, there is a section with the highest revenues ever.
 
 # Reasons about creation
-I like to speculate and follow these types of data and since there are several sites available abroad to do so, I thought about making something similar for data in Italy.
+I like to speculate and follow this type of data and since there are several sites available abroad to do so, I thought about making something similar for data in Italy.
 
-Most sites in Italy only take into account the last two weeks, so I created BoxOffice Italy to take into account the usual data.
+Most sites in Italy only take into account the last two weeks, so I created BoxOffice Italy to take into account the entire cinema run.
 
-I originally had a more basic version developed in PHP and hosted with Apache on my Raspberry. But I wanted to improve my skills as a WebDev and I decided to create a more up to date and modern version in terms of technologies.
+I originally had a more basic version developed in PHP and hosted with Apache on my Raspberry. But I wanted to improve my skills as a web dev and I decided to create a more up to date and modern version.
 
-For the moment it is only available for my private use, as I do not want to publicly share the boxoffice data that I save .
+For the moment it is only available for my private use.
 
-However, a demo version is available on [boxoffice.rastercrow.me] to get an idea of the project.
-
-If you are interested and would like to have full access to the webapp please contact me by email at the following address: alexsandries@outlook.com
+However, a demo version will be available soon.
 
 # Privacy
 The WebApp does not store any user data.
