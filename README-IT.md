@@ -5,7 +5,7 @@
 
 Codice sorgente di BoxOffice Italia, WebApp che ho sviluppato per facilitare la visione degli incassi al botthegino dei film in uscita nei cinema italiani.
 
-La WebApp è stata creata per uso privato, ma una versione demo è possibile usare una versione demo su [boxoffice.rastercrow.me](https://boxoffice.rastercrow.me/).
+La WebApp è stata creata per uso privato, ma sto lavorando a una demo pubblica.
 
 # Struttura
 Il lato client di BoxOffice Italia è stato svilupatto in React Framework, hostato su Firebase Hosting.
@@ -25,11 +25,9 @@ La maggior parte dei siti in italia tengono conto soltanto delle ultime due sett
 
 Inizialmente avevo una versione più basilare sviluppata in PHP e hostata su con Apache sul mio Raspberry. Volevo migliorare però le mie skill da WebDev ho deciso di creare una versione più aggiornata e moderna a livello di tecnologie.
 
-Per il momento è disponibile solo per uso mio privato, in quanto non voglio condividere i dati del boxoffice che salvo pubblicamente.
+Per il momento è disponibile solo per uso mio privato.
 
-E' comunque disponibile una versione demo su [boxoffice.rastercrow.me] per farsi una idea del progetto.
-
-Se siete interessati e vorreste avere accesso completo alla webapp contattatemi per email al seguente indirizzo : alexsandries@outlook.com
+Presto renderò disponibile una versione demo.
 
 # Funzionalità
 <p align="center">
@@ -38,7 +36,7 @@ Se siete interessati e vorreste avere accesso completo alla webapp contattatemi 
 
 BoxOffice Italia permette agli utenti di visionare in maniera rapida ma comunque precisa gli incassi dei film in uscita al cinema in Italia, sulla falsa riga di BoxOffice Mojo o The Numbers.
 
-Questi dati sono visionaibili per giorno, weekend e anno, oppure anche per film specifico.
+Questi dati sono visionabili per giorno, weekend e anno, oppure anche per film specifico.
 
 Sono disponibili inoltre differenza in percentuale degli incassi e alert per i film appena usciti.
 
