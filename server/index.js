@@ -6,25 +6,22 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const axios = require("axios");
 
-
 const app = express();
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://boxofficeitalia.rastercrow.me/');
+  res.header("Access-Control-Allow-Origin", process.env.CURRENT_WEBSITE);
   next();
 });
-
 
 // Read the host address and the port from the environment
 const PORT = process.env.PORT || 3000;
 const TMDB_API_KEY = process.env.TMDB_API_KEY;
 
-console.log("PORT : " + PORT)
-
+//console.log("PORT : " + PORT);
 
 const mongodb_uri = process.env.MONGODB_URI;
 
-console.log("connecting to db...");
+//console.log("connecting to db...");
 mongoose
   .connect(mongodb_uri, {
     useNewUrlParser: true,
@@ -110,7 +107,6 @@ const Weekendboxoffice_db = mongoose.model(
   weekendboxofficeSchema
 );
 
-
 app.use(cors());
 
 app.get("/", (req, res) => {
@@ -121,10 +117,9 @@ app.get("/boxoffice", (req, res) => {
   res.send("<h1>Hello BoxOffice!</h1>");
 });
 
-
 //retrieves all movie documents
 app.get("/boxoffice/movies", (req, res) => {
-  console.log(req.query.title)
+  //console.log(req.query.title);
   if (req.query.length == 0) {
     Movie_db.find({})
       .then((movies_list) => {
@@ -135,7 +130,7 @@ app.get("/boxoffice/movies", (req, res) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         res.status(500).end();
       });
   } else {
@@ -154,7 +149,6 @@ app.get("/boxoffice/movies", (req, res) => {
       });
   }
 });
-
 
 //retrieves movie by id
 app.get("/boxoffice/movies/:id", (req, res) => {
@@ -176,14 +170,14 @@ app.get("/boxoffice/movies/:id", (req, res) => {
 
 //retrieves movie cast by id from tmdb, not local movieID.
 app.get("/boxoffice/movies/tmdb_actors/:id", (req, res) => {
-  let id = parseInt(req.params.id)
-  console.log("chiamata a /boxoffice/movies/tmdb_actors/:id con id : " + id)
+  let id = parseInt(req.params.id);
+  //console.log("chiamata a /boxoffice/movies/tmdb_actors/:id con id : " + id);
   axios
     .get(`https://api.themoviedb.org/3/movie/${id}/credits?`, {
       params: {
         api_key: TMDB_API_KEY,
         language: "it-IT",
-        movie_id: id
+        movie_id: id,
       },
     })
     .then((axios_res) => {
@@ -202,9 +196,8 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
   Movie_db.findById(id.toString())
     .then(async (movie) => {
       if (movie) {
-
         let titolo = movie.titolo.replace(/ *\([^)]*\) */g, "");
-        console.log("chiamata a /boxoffice/movies/tmdb/:id con titolo : " + titolo)
+        //console.log("chiamata a /boxoffice/movies/tmdb/:id con titolo : " + titolo);
 
         //retrieve movie data and also movie info from tmdb
         //make axios call to tmdb
@@ -213,15 +206,15 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
             params: {
               api_key: TMDB_API_KEY,
               language: "it-IT",
-              query: titolo
+              query: titolo,
               //year:movie.
             },
           })
           .then((axios_res) => {
             //sort the result by popularity
-            //console.log(axios_res)
-            axios_res.data.results.sort(GetSortOrder("popularity"));
 
+            axios_res.data.results.sort(GetSortOrder("popularity"));
+            //console.log(axios_res.data.results[0])
             //returns the most popular one
             res.json(axios_res.data.results[0]);
           })
@@ -247,11 +240,11 @@ function GetSortOrder(prop) {
       return -1;
     }
     return 0;
-  }
+  };
 }
 //retrieves all daily documents
 app.get("/boxoffice/dailyboxoffice", (req, res) => {
-  console.log("chiamata a dailyBoxoffice/");
+  //console.log("chiamata a dailyBoxoffice/");
   Dailyboxoffice_db.find({})
     .then((daily_list) => {
       if (daily_list) {
@@ -268,24 +261,22 @@ app.get("/boxoffice/dailyboxoffice", (req, res) => {
 
 //retrieves by day
 app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
-  console.log("chiamata a dailyBoxoffice/:day");
+  //console.log("chiamata a dailyBoxoffice/:day");
 
-  let date1 = new Date(req.params.day)
-  let date2 = new Date(req.params.day)
+  let date1 = new Date(req.params.day);
+  let date2 = new Date(req.params.day);
   /*IMPORTANT
   In production setHours NEEDS to be 23 .
   I don't know why but locally to get the hour 23 I need to set it to 24
   */
-  date2.setHours(24);
+  date2.setHours(23);
   date2.setMinutes(0);
   date2.setSeconds(0);
-  date2 = date2.toISOString().split('.')[0] + "Z"
+  date2 = date2.toISOString().split(".")[0] + "Z";
 
   Dailyboxoffice_db.find({ $or: [{ giorno: date2 }, { giorno: date1 }] })
     .then((daily_list) => {
-
       if (daily_list) {
-
         res.json(daily_list);
       } else {
         res.status(404).end();
@@ -296,7 +287,6 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
       res.status(500).end();
     });
 });
-
 
 //retrieves by movie id
 app.get("/boxoffice/dailyboxofficeMovie/:id", (req, res) => {
@@ -332,7 +322,6 @@ app.get("/boxoffice/weekendboxoffice", (req, res) => {
     });
 });
 
-
 //retrieves all wekeend by weekend date
 app.get("/boxoffice/weekendboxoffice/:weekend", (req, res) => {
   //console.log("chiamata a /boxoffice/weekendboxoffice/:weekend")
@@ -366,15 +355,15 @@ app.get("/boxoffice/weekendboxofficeMovie/:id", (req, res) => {
     });
 });
 
-
 //retrieves yearly box office by year
 app.get("/boxoffice/yearlyboxoffice/:year", (req, res) => {
-  console.log("chiamata a /boxoffice/yearlyboxoffice/:year")
-  start_date = req.params.year + "-01-01"
-  end_date = req.params.year + "-12-31"
-  Movie_db.find({ dataUscita: { $gte: start_date, $lte: end_date } }).sort({ incasso: -1 }).limit(10)
+  //console.log("chiamata a /boxoffice/yearlyboxoffice/:year");
+  start_date = req.params.year + "-01-01";
+  end_date = req.params.year + "-12-31";
+  Movie_db.find({ dataUscita: { $gte: start_date, $lte: end_date } })
+    .sort({ incasso: -1 })
+    .limit(10)
     .then((yearly_list) => {
-
       if (yearly_list) {
         res.json(yearly_list);
       } else {
@@ -387,12 +376,13 @@ app.get("/boxoffice/yearlyboxoffice/:year", (req, res) => {
     });
 });
 
-
 //retrieves all time box office
 app.get("/boxoffice/alltime", (req, res) => {
-  console.log("chiamata a /boxoffice/alltime")
+  //console.log("chiamata a /boxoffice/alltime");
 
-  Movie_db.find().sort({ incasso: -1 }).limit(10)
+  Movie_db.find()
+    .sort({ incasso: -1 })
+    .limit(10)
     .then((all_time_list) => {
       if (all_time_list) {
         res.json(all_time_list);
@@ -407,6 +397,5 @@ app.get("/boxoffice/alltime", (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  //console.log(`Server running on port ${PORT}`);
 });
-
