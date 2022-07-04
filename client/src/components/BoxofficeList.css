@@ -1,12 +1,21 @@
 #tabellaDaily {
   margin-top: 50px !important;
   margin-bottom: 50px !important;
-  width: 90%;
+  width:90%;
+  max-width: 1200px;
   margin: auto;
   overflow-x: auto;
   white-space: nowrap;
 }
-
+#tabellaDaily thead th{
+  border-color: transparent;
+}
+#tabellaDaily tbody td{
+  border-color: transparent;
+}
+.table-rounded{
+  border-radius: 25px;
+}
 @media only screen and (max-width: 425px) {
   #tabellaDaily {
     margin-top: 50px !important;

@@ -10,12 +10,12 @@ import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
 
 function Dailyboxoffice(props) {
-  let date
-  let stateDate = props.location.state
+  let date;
+  let stateDate = props.location.state;
 
   if (stateDate !== undefined) {
-    date = stateDate.giorno
-    window.history.replaceState(null, '')
+    date = stateDate.giorno;
+    window.history.replaceState(null, "");
   } else {
     date = new Date();
     date.setDate(date.getDate() - 1);
@@ -31,7 +31,8 @@ function Dailyboxoffice(props) {
   let month_today = ("0" + (date_today.getMonth() + 1)).slice(-2);
   let giorno_today = ("0" + date_today.getDate()).slice(-2);
   let full_year_today = date_today.getFullYear();
-  let date_format_today = full_year_today + "-" + month_today + "-" + giorno_today;
+  let date_format_today =
+    full_year_today + "-" + month_today + "-" + giorno_today;
 
   //day sarebbe il giorno precedente a questo, essendo il boxoffice sempre dei giorni precedenti
   const [day, setDay] = useState(date_format);
@@ -41,14 +42,11 @@ function Dailyboxoffice(props) {
 
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-
     BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
       setDailyList(list);
 
       setFetchedDataComplete(true);
     });
-
-
   };
 
   useEffect(hook, [day]);
@@ -60,11 +58,7 @@ function Dailyboxoffice(props) {
     let yesterday_month = ("0" + (yesterday.getMonth() + 1)).slice(-2);
     let yesterday_giorno = ("0" + yesterday.getDate()).slice(-2);
     let yesterday_date_format =
-      yesterday.getFullYear() +
-      "-" +
-      yesterday_month +
-      "-" +
-      yesterday_giorno;
+      yesterday.getFullYear() + "-" + yesterday_month + "-" + yesterday_giorno;
     setDay(yesterday_date_format);
 
     event.preventDefault();
@@ -104,9 +98,9 @@ function Dailyboxoffice(props) {
       <Row id="buttonRow">
         <Button value="day" onClick={handleButtonPrecedente}>
           Precedente
-            </Button>
+        </Button>
         <div id="titolo_list">
-          <h1>Incasso del giorno {day}</h1>
+          <h1>Incasso del giorno {day.split("-").reverse().join("-")}</h1>
           <DatePicker
             clearIcon={null}
             maxDate={new Date(date_format_today)}
@@ -119,22 +113,24 @@ function Dailyboxoffice(props) {
             Successivo
           </Button>
         ) : (
-            <Button value="day" onClick={handleButtonSuccessivo}>
-              Successivo
-            </Button>
-          )}
+          <Button value="day" onClick={handleButtonSuccessivo}>
+            Successivo
+          </Button>
+        )}
       </Row>
       {!fetchedDataComplete ? (
-        <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
+        <Image
+          src="/assets/loading_icon.svg"
+          style={{ display: "flex", margin: "auto" }}
+        />
       ) : dailyList.length > 0 ? (
-
         <Table
           id="tabellaDaily"
           striped
-          bordered
           hover
           responsive="md"
           variant="dark"
+          className={"table-rounded"}
         >
           <thead>
             <tr>
@@ -149,15 +145,19 @@ function Dailyboxoffice(props) {
 
           <tbody>
             {dailyList.map((movie) => (
-              <TableMovie key={movie.movie} movieProps={movie} tableType="day" />
+              <TableMovie
+                key={movie.movie}
+                movieProps={movie}
+                tableType="day"
+              />
             ))}
           </tbody>
         </Table>
       ) : (
-            <h1 style={{ textAlign: "center", marginTop: "100px" }}>
-              Non ho trovato dati per questo giorno
-            </h1>
-          )}
+        <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+          Non ho trovato dati per questo giorno
+        </h1>
+      )}
     </>
   );
 }

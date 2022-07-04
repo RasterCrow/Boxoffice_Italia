@@ -9,8 +9,8 @@ import Yearlyboxoffice from "./components/YearlyTable";
 import AllTimeboxoffice from "./components/AllTimeTable";
 import MyNavbar from "./components/Navbar";
 import MovieInfo from "./components/MovieInfo";
-import SearchPage from "./components/SearchPage"
-import HomePage from "./components/Home"
+import SearchPage from "./components/SearchPage";
+import HomePage from "./components/Home";
 import "./App.css";
 
 const MyNavbarWithRouter = withRouter(MyNavbar);
@@ -18,7 +18,6 @@ const MyNavbarWithRouter = withRouter(MyNavbar);
 function App() {
   return (
     <Router>
-
       <MyNavbarWithRouter />
       <Switch>
         <Route path="/daily" component={Dailyboxoffice} />

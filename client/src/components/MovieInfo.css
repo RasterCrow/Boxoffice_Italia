@@ -35,19 +35,19 @@
 #ImagePoster a {
   margin: auto;
   height: 450px;
+  margin-top:80px;
   max-width: 100%;
-  transition: transform 0.2s; /* Animation */
+  transition: transform 1; /* Animation */
 }
 #ImagePoster a img:hover {
   transform: scale(1.05);
 }
 
 #ImagePoster img {
-  padding-top: 30px;
+  border-radius: 20px;
   width: 100%;
   margin: auto;
   max-width: 100%;
-  margin-bottom: 60px !important;
 }
 
 .ImgLinkFilm {
@@ -81,6 +81,8 @@
   margin-right: 10px;
 }
 #MovieDescription {
+  
+  border-radius: 20px;
   margin: auto;
   background-color: aliceblue;
   padding: 20px;
@@ -194,7 +196,7 @@
   }
 
   .stickyCast {
-    top: 640px;
+    top: 570px;
     position: sticky;
     position: -webkit-sticky;
   }

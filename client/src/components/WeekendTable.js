@@ -5,17 +5,16 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 import Table from "react-bootstrap/Table";
-import Image from "react-bootstrap/Image"
+import Image from "react-bootstrap/Image";
 import "./BoxofficeList.css";
 import TableMovie from "./TableMovie";
 
 function Weekendboxoffice(props) {
-
   //if I have a weekend date in the state ( I clicked on the MovieInfo Table on a specific date ) I load that table, otherwise it loads last weekend
-  let weekend_first
-  let stateDate = props.location.state
+  let weekend_first;
+  let stateDate = props.location.state;
   if (stateDate !== undefined) {
-    weekend_first = stateDate.weekend
+    weekend_first = stateDate.weekend;
   } else {
     let date = new Date();
     let diff =
@@ -36,10 +35,10 @@ function Weekendboxoffice(props) {
 
   //hook effect, loads everytime there is a rebuild with new weekend
   const hook = () => {
-    setFetchedDataComplete(false)
+    setFetchedDataComplete(false);
     BoxOfficeService.getWeekendBoxOfficeList(weekend).then((list) => {
       setWeekendList(list);
-      setFetchedDataComplete(true)
+      setFetchedDataComplete(true);
     });
   };
   useEffect(hook, [weekend]);
@@ -81,9 +80,7 @@ function Weekendboxoffice(props) {
         (next_weekend.getDay() + 2) +
         (next_weekend.getDay() === 5 ? 0 : +6);
       next_weekend.setDate(diff);
-      let next_weekend_month = ("0" + (next_weekend.getMonth() + 1)).slice(
-        -2
-      );
+      let next_weekend_month = ("0" + (next_weekend.getMonth() + 1)).slice(-2);
       let next_weekend_giorno = ("0" + next_weekend.getDate()).slice(-2);
       let next_weekend_date_format =
         next_weekend.getFullYear() +
@@ -92,7 +89,6 @@ function Weekendboxoffice(props) {
         "-" +
         next_weekend_giorno;
       setWeekend(next_weekend_date_format);
-
     }
 
     event.preventDefault();
@@ -103,23 +99,30 @@ function Weekendboxoffice(props) {
       <Row id="buttonRow">
         <Button value="weekend" onClick={handleButtonPrecedente}>
           Precedente
-            </Button>
-        <h1 id="titolo_list"> Incasso del weekend {weekend} </h1>
+        </Button>
+        <h1 id="titolo_list">
+          {" "}
+          Incasso del weekend {weekend.split("-").reverse().join("-")}{" "}
+        </h1>
         {weekend === weekend_date_format ? (
           <Button value="weekend" onClick={handleButtonSuccessivo} disabled>
             Successivo
           </Button>
         ) : (
-            <Button value="weekend" onClick={handleButtonSuccessivo}>
-              Successivo
-            </Button>
-          )}
+          <Button value="weekend" onClick={handleButtonSuccessivo}>
+            Successivo
+          </Button>
+        )}
       </Row>
 
       {!fetchedDataComplete ? (
-        <Image src="/assets/loading_icon.svg" style={{ display: "flex", margin: "auto" }} />
+        <Image
+          src="/assets/loading_icon.svg"
+          style={{ display: "flex", margin: "auto" }}
+        />
       ) : weekendList.length > 0 ? (
         <Table
+          className={"table-rounded"}
           id="tabellaDaily"
           striped
           bordered
@@ -139,15 +142,19 @@ function Weekendboxoffice(props) {
           </thead>
           <tbody>
             {weekendList.map((movie) => (
-              <TableMovie key={movie.movie} movieProps={movie} tableType="weekend" />
+              <TableMovie
+                key={movie.movie}
+                movieProps={movie}
+                tableType="weekend"
+              />
             ))}
           </tbody>
         </Table>
       ) : (
-            <h1 style={{ textAlign: "center", marginTop: "100px" }}>
-              Non ho trovato dati per questo giorno
-            </h1>
-          )}
+        <h1 style={{ textAlign: "center", marginTop: "100px" }}>
+          Non ho trovato dati per questo giorno
+        </h1>
+      )}
     </>
   );
 }

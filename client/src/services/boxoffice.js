@@ -1,5 +1,7 @@
 import axios from 'axios'
-const baseUrl = '/boxoffice'
+const baseUrl = 'https://afternoon-springs-92210.herokuapp.com/boxoffice'
+
+//"proxy": "https://afternoon-springs-92210.herokuapp.com",
 
 
 
