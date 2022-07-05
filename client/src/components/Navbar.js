@@ -38,13 +38,13 @@ function MyNavbar(props) {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     history.push({
       pathname: "/search",
       search: `?${movieToSearch}`,
       state: { movie: movieToSearch },
     });
     //redirect to search page with movies that start with input value
-    event.preventDefault();
   };
 
   return (
