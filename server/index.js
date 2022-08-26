@@ -135,7 +135,7 @@ app.get("/boxoffice/movies", (req, res) => {
       });
   } else {
     var regexp = `.*${req.query.title.toUpperCase()}.*`;
-    console.log(regexp);
+    //console.log(regexp);
     Movie_db.find({ titolo: { $regex: regexp } })
       .then((movies_list) => {
         if (movies_list) {
@@ -145,7 +145,7 @@ app.get("/boxoffice/movies", (req, res) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        //console.log(error);
         res.status(500).end();
       });
   }
@@ -164,7 +164,7 @@ app.get("/boxoffice/movies/:id", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -227,7 +227,7 @@ app.get("/boxoffice/movies/tmdb/:id", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -255,7 +255,7 @@ app.get("/boxoffice/dailyboxoffice", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -284,7 +284,7 @@ app.get("/boxoffice/dailyboxoffice/:day", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -318,7 +318,7 @@ app.get("/boxoffice/weekendboxoffice", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -335,7 +335,7 @@ app.get("/boxoffice/weekendboxoffice/:weekend", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -351,7 +351,7 @@ app.get("/boxoffice/weekendboxofficeMovie/:id", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -372,7 +372,7 @@ app.get("/boxoffice/yearlyboxoffice/:year", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -392,7 +392,7 @@ app.get("/boxoffice/alltime", (req, res) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      //console.log(error);
       res.status(500).end();
     });
 });
@@ -400,3 +400,5 @@ app.get("/boxoffice/alltime", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports = app;

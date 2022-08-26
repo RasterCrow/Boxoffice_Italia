@@ -1,5 +1,7 @@
 import axios from "axios";
-const baseUrl = "https://afternoon-springs-92210.herokuapp.com/boxoffice";
+const baseUrl = "https://boxofficeitalia-backend.vercel.app/";
+
+//const baseUrl = "https://afternoon-springs-92210.herokuapp.com/boxoffice";
 
 // const baseUrl = "http://localhost:5000/boxoffice";
 
