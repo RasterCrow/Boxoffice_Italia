@@ -28,16 +28,12 @@ const getMovieList = () => {
 
 const getDailyBoxOfficeList = (day) => {
   return new Promise(function (resolve, reject) {
-    console.log("has : ", dailyBoxOfficeList.has(day));
     if (!dailyBoxOfficeList.has(day)) {
       axios.get(`${baseUrl}/dailyboxoffice/${day}`).then((response) => {
         dailyBoxOfficeList.set(day, response.data);
-
-        console.log("if: ", dailyBoxOfficeList);
         resolve(response.data);
       });
     } else {
-      console.log("else: ", dailyBoxOfficeList);
       resolve(dailyBoxOfficeList.get(day));
     }
   });
