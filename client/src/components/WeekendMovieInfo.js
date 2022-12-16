@@ -33,9 +33,9 @@ function WeekendMovieInfo(props) {
         >
           <thead>
             <tr>
-              <th>Weekend</th>
               <th>Posizione</th>
-              <th>Incasso</th>
+              <th>Weekend</th>
+              <th>Incasso wDf</th>
               <th>Presenze</th>
               <th>Weekend in classifica</th>
             </tr>

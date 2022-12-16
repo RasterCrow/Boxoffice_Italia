@@ -45,7 +45,7 @@ function SearchPage(props) {
       for (let number = 1; number <= pages; number++) {
         if (number > 6 && number < pages - 3) {
           if (!eliAdded) {
-            items.push(<Pagination.Ellipsis />);
+            items.push(<Pagination.Ellipsis key={pages.length} />);
             eliAdded = true;
           }
         } else {

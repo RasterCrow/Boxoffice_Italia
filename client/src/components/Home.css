@@ -22,7 +22,7 @@
     min-width: 100%;
     margin: auto;
     min-height: 500px;
-    height: 85vh;
+    height: 60vh;
   }
 }
 @media only screen and (max-width: 321px) {

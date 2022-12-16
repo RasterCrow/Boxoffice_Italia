@@ -1,24 +1,4 @@
 /* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0);
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: rgb(207, 205, 205);
-  scrollbar-width: thin;
-  border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 
 #RowMovieData {
   margin-right: 0px !important;
@@ -26,10 +6,13 @@
 }
 
 #MovieTitle {
-  margin: auto;
+  display: flex;
+  width:100%;
+  justify-content: center;
   margin-top: 5px !important;
   margin-bottom: 5px !important;
-  font-size: min(9vw, 50px);
+  font-size: min(7vw, 50px);
+
 }
 
 #ImagePoster a {
@@ -64,15 +47,14 @@
 }
 
 #MovieRandomInfo {
-  margin-left: auto;
-  margin-right: auto;
+  display:flex;
+  width:100%;
+  justify-content: center;
+  flex-wrap: wrap;
   font-size: min(5.5vw, 25px);
-  max-width: 800px;
-  width: 80vw;
-  height: 50px;
 }
 #MovieRandomInfo img {
-  margin-bottom: auto;
+  
 }
 #MovieRandomInfo img {
   max-width: min(5vw, 30px);
@@ -205,5 +187,23 @@
     top: 580px;
     position: sticky;
     position: -webkit-sticky;
+  }
+
+}
+
+@media only screen and (max-width: 769px) {
+
+
+  #MovieDescription {
+  
+    border-radius: 20px;
+    margin: auto;
+    background-color: aliceblue;
+    padding: 20px;
+    max-width: 90%;
+  
+    color: black !important;
+    box-shadow: unset;
+    margin-bottom: 20px;
   }
 }

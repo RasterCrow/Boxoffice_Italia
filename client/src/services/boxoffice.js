@@ -1,38 +1,85 @@
 import axios from "axios";
-const baseUrl = "https://boxofficeitalia-backend.vercel.app/";
+
+const baseUrl = "https://boxofficeitalia-backend.vercel.app/boxoffice";
 
 //const baseUrl = "https://afternoon-springs-92210.herokuapp.com/boxoffice";
 
 // const baseUrl = "http://localhost:5000/boxoffice";
 
-//get list of all movies available
-const getMovieList = () => {
-  const request = axios.get(`${baseUrl}/movies`);
+let movieList = {};
+const dailyBoxOfficeList = new Map();
+const weekendBoxOfficeList = new Map();
+const yearlyBoxOfficeList = new Map();
+const movieInfoBoxOfficeList = new Map();
+const movieByTitleList = new Map();
 
-  return request.then((response) => response.data);
+const getMovieList = () => {
+  return new Promise(function (resolve, reject) {
+    if (!movieList) {
+      axios.get(`${baseUrl}/movies`).then((response) => {
+        movieList = response.data;
+        resolve(response.data);
+      });
+    } else {
+      resolve(movieList);
+    }
+  });
 };
 
 const getDailyBoxOfficeList = (day) => {
-  const request = axios.get(`${baseUrl}/dailyboxoffice/${day}`);
+  return new Promise(function (resolve, reject) {
+    console.log("has : ", dailyBoxOfficeList.has(day));
+    if (!dailyBoxOfficeList.has(day)) {
+      axios.get(`${baseUrl}/dailyboxoffice/${day}`).then((response) => {
+        dailyBoxOfficeList.set(day, response.data);
 
-  return request.then((response) => response.data);
+        console.log("if: ", dailyBoxOfficeList);
+        resolve(response.data);
+      });
+    } else {
+      console.log("else: ", dailyBoxOfficeList);
+      resolve(dailyBoxOfficeList.get(day));
+    }
+  });
 };
 
 const getWeekendBoxOfficeList = (weekend) => {
-  const request = axios.get(`${baseUrl}/weekendboxoffice/${weekend}`);
-  return request.then((response) => response.data);
+  return new Promise(function (resolve, reject) {
+    if (!weekendBoxOfficeList.has(weekend)) {
+      axios.get(`${baseUrl}/weekendboxoffice/${weekend}`).then((response) => {
+        weekendBoxOfficeList.set(weekend, response.data);
+        resolve(response.data);
+      });
+    } else {
+      resolve(weekendBoxOfficeList.get(weekend));
+    }
+  });
 };
 
 const getYearlyBoxOfficeList = (year) => {
-  const request = axios.get(`${baseUrl}/yearlyBoxoffice/${year}`);
-
-  return request.then((response) => response.data);
+  return new Promise(function (resolve, reject) {
+    if (!yearlyBoxOfficeList.has(year)) {
+      axios.get(`${baseUrl}/yearlyBoxoffice/${year}`).then((response) => {
+        yearlyBoxOfficeList.set(year, response.data);
+        resolve(response.data);
+      });
+    } else {
+      resolve(yearlyBoxOfficeList.get(year));
+    }
+  });
 };
 
 const getMovieInfo = (id) => {
-  const request = axios.get(`${baseUrl}/movies/${id}`);
-
-  return request.then((response) => response.data);
+  return new Promise(function (resolve, reject) {
+    if (!movieInfoBoxOfficeList.has(id)) {
+      axios.get(`${baseUrl}/movies/${id}`).then((response) => {
+        movieInfoBoxOfficeList.set(id, response.data);
+        resolve(response.data);
+      });
+    } else {
+      resolve(movieInfoBoxOfficeList.get(id));
+    }
+  });
 };
 
 const getMovieInfoTMDB = (id) => {
@@ -60,9 +107,16 @@ const getMovieWeekendBoxOfficeList = (id) => {
 };
 
 const getMovieByTitle = (title) => {
-  const request = axios.get(`${baseUrl}/movies?title=${title}`);
-
-  return request.then((response) => response.data);
+  return new Promise(function (resolve, reject) {
+    if (!movieByTitleList.has(title)) {
+      axios.get(`${baseUrl}/movies?title=${title}`).then((response) => {
+        movieByTitleList.set(title, response.data);
+        resolve(response.data);
+      });
+    } else {
+      resolve(movieByTitleList.get(title));
+    }
+  });
 };
 
 //The ID is the one from TMDB, not from my local DB.
@@ -70,20 +124,8 @@ const getActorsByMovieID = (IdTMDB) => {
   const request = axios.get(`${baseUrl}/movies/tmdb_actors/${IdTMDB}`);
   return request.then((response) => response.data);
 };
-/*
-const deletePerson = (id) => {
-    const request = axios.delete(`${baseUrl}/${id}`)
-    return request
-    //return request.then(response => response.data)
-}
 
-const updatePersonNumber = (id, personWithNewPhone) => {
-    const request = axios.put(`${baseUrl}/${id}`, personWithNewPhone)
-    return request.then(response => response.data)
-    //return request.then(response => response.data)
-}
-*/
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getMovieList,
   getDailyBoxOfficeList,

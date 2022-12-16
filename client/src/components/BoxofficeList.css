@@ -93,13 +93,14 @@ thead {
   td,
   tr {
     display: block;
+    
   }
-
   /* Hide table headers (but not display: none;, for accessibility) */
   thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
+    
   }
 
   tr {
@@ -107,58 +108,69 @@ thead {
   }
 
   td {
-    /* Behave  like a "row" */
-    border: none;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding-left: 50%;
+    padding-left:10px !important;
+    padding-right:10px !important;
     font-size: 10px;
-    text-align: right;
+    overflow-x: auto;
+    display:flex;
+    gap:20px;
+    justify-content: space-between;
+    
   }
-
-  td:before {
-    /* Now like a table header */
-    position: absolute;
-    /* Top/left values mimic padding */
-
-    left: -60px;
-    width: 45%;
-    margin-right: 20px;
-    white-space: nowrap;
-  }
-
-  td:nth-of-type(1):before {
-    content: "Posizione";
-    font-size: 12px;
-    left: -50px;
-  }
-  td:nth-of-type(2):before {
-    content: "Titolo";
-    font-size: 12px;
-  }
-  td:nth-of-type(3):before {
+  
+  
+    tr:first-child {
+      border-radius: 25px 25px 0px 0px;
+    }
+    tr:last-child{
+      border-radius: 0px 0px 25px 25px;
+    }
+    tr:only-child{
+      border-radius: 25px 25px 25px 25px;
+    }
+    .posizioneClassifica:before {
+      content: "Posizione";
+      font-size: 12px;
+      left: -50px;
+    }
+    .titolo:before {
+      content: "Titolo";
+      font-size: 12px;
+    }
+  .dataUscita:before {
     content: "Data Uscita";
     font-size: 12px;
-    left: -42px;
   }
-  td:nth-of-type(4):before {
+  .giorno:before {
+    content: "Giorno";
+    font-size: 12px;
+  }
+  .weekend:before {
+    content: "Weekend";
+    font-size: 12px;
+  }
+  .incasso:before {
     content: "Incasso";
     font-size: 12px;
-    left: -55px;
   }
-  td:nth-of-type(5):before {
+  .incassoDaily:before {
+    content: "Incasso dDf wDf";
+    font-size: 12px;
+  }
+  .incassoWeekend:before {
+    content: "Incasso wDf";
+    font-size: 12px;
+  }
+  .presenze:before {
     content: "Presenze";
     font-size: 12px;
-    left: -50px;
   }
   .weekendTotaleAlGiorno:before {
     content: "Incasso ad oggi";
     font-size: 12px;
-    left: -32px;
   }
   .weekendNumero:before {
     content: "Weekend in classifica";
     font-size: 12px;
-    left: -10px;
   }
 }

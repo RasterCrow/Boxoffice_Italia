@@ -42,8 +42,8 @@ function DailyMovieInfo(props) {
         >
           <thead>
             <tr>
-              <th>Giorno</th>
               <th>Posizione</th>
+              <th>Giorno</th>
               <th>Incasso dDf wDf</th>
               <th>Presenze</th>
               <th>Incasso ad oggi</th>

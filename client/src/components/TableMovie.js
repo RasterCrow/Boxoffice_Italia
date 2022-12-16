@@ -25,8 +25,10 @@ function TableMovie(props) {
       <>
         {movieInfo !== "" ? (
           <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
-            <td>{movieProps.posizioneClassifica}</td>
-            <td>
+            <td className="posizioneClassifica">
+              {movieProps.posizioneClassifica}
+            </td>
+            <td className="titolo">
               {isInLast7Days(movieInfo.dataUscita) ? (
                 <>
                   <span style={{ color: "red", marginRight: "8px" }}>
@@ -38,7 +40,7 @@ function TableMovie(props) {
                 <div className="td-titolo">{movieInfo.titolo}</div>
               )}
             </td>
-            <td>
+            <td className="dataUscita">
               {movieInfo.dataUscita !== undefined
                 ? ("0" + new Date(movieInfo.dataUscita).getDate()).slice(-2) +
                   "-" +
@@ -49,14 +51,14 @@ function TableMovie(props) {
                   new Date(movieInfo.dataUscita).getFullYear()
                 : "Sconosciuto"}
             </td>
-            <td>
+            <td className="incasso">
               {movieProps.incasso.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
                 { minimumFractionDigits: 0 }
               )}
             </td>
-            <td>
+            <td className="presenze">
               {movieProps.presenze.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
@@ -84,9 +86,11 @@ function TableMovie(props) {
       <>
         {movieInfo !== "" ? (
           <tr onClick={(event) => history.push(`/movie/${movieProps.movie}`)}>
-            <td>{movieProps.posizioneClassificaWeekend}</td>
-            <td>{movieInfo.titolo}</td>
-            <td>
+            <td className="posizioneClassifica">
+              {movieProps.posizioneClassificaWeekend}
+            </td>
+            <td className="titolo">{movieInfo.titolo}</td>
+            <td className="dataUscita">
               {movieInfo.dataUscita !== undefined
                 ? ("0" + new Date(movieInfo.dataUscita).getDate()).slice(-2) +
                   "-" +
@@ -98,14 +102,14 @@ function TableMovie(props) {
                 : "Sconosciuto"}
             </td>
 
-            <td>
+            <td className="incasso">
               {parseInt(movieProps.incassoWeekend).toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
                 { minimumFractionDigits: 0 }
               )}
             </td>
-            <td>
+            <td className="presenze">
               {parseInt(movieProps.presenzeWeekend).toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
@@ -127,9 +131,9 @@ function TableMovie(props) {
       <>
         {movieProps !== "" ? (
           <tr onClick={(event) => history.push(`/movie/${movieProps.id}`)}>
-            <td>{posizione}</td>
-            <td>{movieProps.titolo}</td>
-            <td>
+            <td className="posizioneClassifica">{posizione}</td>
+            <td className="titolo">{movieProps.titolo}</td>
+            <td className="dataUscita">
               {movieProps.dataUscita !== undefined
                 ? ("0" + new Date(movieProps.dataUscita).getDate()).slice(-2) +
                   "-" +
@@ -142,14 +146,14 @@ function TableMovie(props) {
                 : "Sconosciuto"}
             </td>
 
-            <td>
+            <td className="incasso">
               {movieProps.incasso.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
                 { minimumFractionDigits: 0 }
               )}
             </td>
-            <td>
+            <td className="presenze">
               {movieProps.presenze.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
@@ -191,8 +195,11 @@ function TableMovie(props) {
               })
             }
           >
+            <td className="posizioneClassifica">
+              {movieProps.posizioneClassifica}
+            </td>
             {isWeekend ? (
-              <td style={{ color: "orange" }}>
+              <td className="giorno" style={{ color: "orange" }}>
                 {movieProps.giorno !== undefined
                   ? ("0" + new Date(movieProps.giorno).getDate()).slice(-2) +
                     "/" +
@@ -204,7 +211,7 @@ function TableMovie(props) {
                   : "Sconosciuto"}
               </td>
             ) : (
-              <td>
+              <td className="giorno">
                 {movieProps.giorno !== undefined
                   ? ("0" + new Date(movieProps.giorno).getDate()).slice(-2) +
                     "/" +
@@ -217,8 +224,7 @@ function TableMovie(props) {
               </td>
             )}
 
-            <td>{movieProps.posizioneClassifica}</td>
-            <td>
+            <td className="incassoDaily">
               <div
                 style={{
                   display: "flex",
@@ -279,7 +285,7 @@ function TableMovie(props) {
                 )}
               </div>
             </td>
-            <td>
+            <td className="presenze">
               {movieProps.presenze.toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
@@ -314,7 +320,10 @@ function TableMovie(props) {
               })
             }
           >
-            <td>
+            <td className="posizioneClassifica">
+              {movieProps.posizioneClassificaWeekend}
+            </td>
+            <td className="weekend">
               {("0" + new Date(movieProps.inizioWeekend).getDate()).slice(-2) +
                 "/" +
                 (
@@ -328,8 +337,7 @@ function TableMovie(props) {
                   -2
                 )}
             </td>
-            <td>{movieProps.posizioneClassificaWeekend}</td>
-            <td>
+            <td className="incassoWeekend">
               {parseInt(prec.toString().replace(/,/g, "")) === 1 ? (
                 <>
                   <div>
@@ -374,7 +382,7 @@ function TableMovie(props) {
                 </>
               )}
             </td>
-            <td>
+            <td className="presenze">
               {parseInt(movieProps.presenzeWeekend).toLocaleString(
                 undefined, // leave undefined to use the browser's locale,
                 // or use a string like 'en-US' to override it.
