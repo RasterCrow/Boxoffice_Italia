@@ -383,7 +383,7 @@ app.get("/boxoffice/alltime", (req, res) => {
 
   Movie_db.find()
     .sort({ incasso: -1 })
-    .limit(10)
+    .limit(15)
     .then((all_time_list) => {
       if (all_time_list) {
         res.json(all_time_list);
