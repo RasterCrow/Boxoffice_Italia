@@ -4,7 +4,8 @@ import { useHistory } from "react-router-dom";
 import BoxOfficeService from "../services/boxoffice.js";
 import "./BoxofficeList.css";
 function TableMovie(props) {
-  const { movieProps, tableType, posizione, prec, weekPrec } = props;
+  const { movieProps, tableType, posizione, prec, weekPrec, daysFromFirstDay } =
+    props;
   //console.log(props)
   const [movieInfo, setMovieInfo] = useState("");
   const history = useHistory();
@@ -194,6 +195,7 @@ function TableMovie(props) {
                 state: { giorno: new Date(movieProps.giorno) },
               })
             }
+            className={daysFromFirstDay === 0 ? "weekLine" : ""}
           >
             <td className="posizioneClassifica">
               {movieProps.posizioneClassifica}

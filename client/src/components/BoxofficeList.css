@@ -16,6 +16,9 @@
 .table-rounded{
   border-radius: 25px;
 }
+.weekLine{
+  border-top: 1.1px solid rgb(255, 196, 0);
+}
 @media only screen and (max-width: 425px) {
   #tabellaDaily {
     margin-top: 50px !important;

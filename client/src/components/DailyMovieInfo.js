@@ -12,6 +12,7 @@ function DailyMovieInfo(props) {
   const [dailyList, setDailyList] = useState([]);
 
   let indexPrec = 0;
+  let firstDay;
   let incassoPrecedente = [1, 1, 1, 1, 1, 1, 1];
 
   const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
@@ -60,8 +61,18 @@ function DailyMovieInfo(props) {
               });
               indexPrec = (indexPrec + 1) % 7;
               incassoPrecedente = newIncassi;
+
+              let currentDay = new Date(movie.giorno);
+              if (!firstDay) firstDay = currentDay;
+              let daysFromFirstDay =
+                firstDay !== currentDay &&
+                -(
+                  (firstDay.getTime() - currentDay.getTime()) /
+                  (1000 * 3600 * 24)
+                ) % 7;
               return (
                 <TableMovie
+                  daysFromFirstDay={daysFromFirstDay}
                   key={movie.id}
                   movieProps={movie}
                   tableType="movieInfoDay"
