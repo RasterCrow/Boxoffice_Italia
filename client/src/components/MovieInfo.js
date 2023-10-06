@@ -8,6 +8,7 @@ import WeekendMovieInfo from "./WeekendMovieInfo";
 import "./MovieInfo.css";
 
 import BoxOfficeService from "../services/boxoffice.js";
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
 
 function CastCard({ person }) {
   return (
@@ -71,6 +72,15 @@ function CastList({ movieCast, movieId }) {
 }
 
 function MovieInfo(props) {
+  const {
+    movieInfoBoxOfficeList,
+    setMovieInfoBoxOfficeList,
+    tmdbDataList,
+    setTmdbDataList,
+    tmdbActorsList,
+    setTmdbActorsList,
+  } = useBoxOfficeContext();
+
   let movieID = props.match.params.id;
 
   const [movieDataTMDB, setMovieDataTMDB] = useState({});
@@ -81,28 +91,40 @@ function MovieInfo(props) {
   const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
 
   const hook = () => {
-    //Codice che dovrebbe girare normalmente
-    BoxOfficeService.getMovieInfoTMDB(movieID)
+    //Codice che dovrebbe girare normalment
+    BoxOfficeService.getMovieInfoTMDB(movieID, tmdbDataList, setTmdbDataList)
       .then((movie) => {
         setMovieDataTMDB(movie);
         return movie;
       })
       .then((movie) => {
         if (movie.id !== undefined) {
-          BoxOfficeService.getActorsByMovieID(movie.id)
+          BoxOfficeService.getActorsByMovieID(
+            movie.id,
+            tmdbActorsList,
+            setTmdbActorsList
+          )
             .then((cast) => {
               setMovieCast(cast);
             })
             .then(() => {
               //after getting data from TMDB get box office data from my db
-              BoxOfficeService.getMovieInfo(movieID).then((movie) => {
+              BoxOfficeService.getMovieInfo(
+                movieID,
+                movieInfoBoxOfficeList,
+                setMovieInfoBoxOfficeList
+              ).then((movie) => {
                 setMovieDataMongo(movie);
                 setFetchedDataComplete(true);
               });
             });
         } else {
           //even if I can't get data from tmdb I still get data from my mongo db
-          BoxOfficeService.getMovieInfo(movieID).then((movie) => {
+          BoxOfficeService.getMovieInfo(
+            movieID,
+            movieInfoBoxOfficeList,
+            setMovieInfoBoxOfficeList
+          ).then((movie) => {
             setMovieDataMongo(movie);
             setFetchedDataComplete(true);
           });

@@ -3,7 +3,11 @@ import { withRouter } from "react-router";
 import { useHistory } from "react-router-dom";
 import BoxOfficeService from "../services/boxoffice.js";
 import "./BoxofficeList.css";
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
+
 function TableMovie(props) {
+  const { movieInfoBoxOfficeList, setMovieInfoBoxOfficeList } =
+    useBoxOfficeContext();
   const { movieProps, tableType, posizione, prec, weekPrec, daysFromFirstDay } =
     props;
   //console.log(props)
@@ -14,7 +18,11 @@ function TableMovie(props) {
 
   const hook = () => {
     if (tableType === "day" || tableType === "weekend") {
-      BoxOfficeService.getMovieInfo(movieProps.movie).then((movie) => {
+      BoxOfficeService.getMovieInfo(
+        movieProps.movie,
+        movieInfoBoxOfficeList,
+        setMovieInfoBoxOfficeList
+      ).then((movie) => {
         setMovieInfo(movie);
       });
     }

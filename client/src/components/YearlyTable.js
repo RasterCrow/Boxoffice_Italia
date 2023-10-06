@@ -7,9 +7,10 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 
 import "./BoxofficeList.css";
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
 
 function Yearlyboxoffice() {
-  //This year
+  const { yearlyBoxOfficeList, setYearlyBoxOfficeList } = useBoxOfficeContext();
   let date = new Date();
   date.setDate(date.getDate() - 1);
   let full_year = date.getFullYear();
@@ -22,7 +23,11 @@ function Yearlyboxoffice() {
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
     setFetchedDataComplete(false);
-    BoxOfficeService.getYearlyBoxOfficeList(year).then((list) => {
+    BoxOfficeService.getYearlyBoxOfficeList(
+      year,
+      yearlyBoxOfficeList,
+      setYearlyBoxOfficeList
+    ).then((list) => {
       setYearlyList(list);
       setFetchedDataComplete(true);
     });

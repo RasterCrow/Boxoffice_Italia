@@ -8,8 +8,11 @@ import Table from "react-bootstrap/Table";
 import Image from "react-bootstrap/Image";
 import "./BoxofficeList.css";
 import TableMovie from "./TableMovie";
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
 
 function Weekendboxoffice(props) {
+  const { weekendBoxOfficeList, setWeekendBoxOfficeList } =
+    useBoxOfficeContext();
   //if I have a weekend date in the state ( I clicked on the MovieInfo Table on a specific date ) I load that table, otherwise it loads last weekend
   let weekend_first;
   let stateDate = props.location.state;
@@ -36,8 +39,16 @@ function Weekendboxoffice(props) {
   //hook effect, loads everytime there is a rebuild with new weekend
   const hook = () => {
     setFetchedDataComplete(false);
-    BoxOfficeService.getWeekendBoxOfficeList(weekend).then((list) => {
-      setWeekendList(list);
+    BoxOfficeService.getWeekendBoxOfficeList(
+      weekend,
+      weekendBoxOfficeList,
+      setWeekendBoxOfficeList
+    ).then((list) => {
+      setWeekendList(
+        list.sort((a, b) =>
+          a.posizioneClassificaWeekend > b.posizioneClassificaWeekend ? 1 : -1
+        )
+      );
       setFetchedDataComplete(true);
     });
   };

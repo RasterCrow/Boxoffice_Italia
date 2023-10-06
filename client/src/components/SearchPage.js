@@ -7,6 +7,8 @@ import Pagination from "react-bootstrap/Pagination";
 import PageItem from "react-bootstrap/PageItem";
 import MovieCard from "./MovieCard";
 import "./SearchPage.css";
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
+
 function SearchPage(props) {
   const movie = props.location.state.movie;
   const [similarMovieList, setSimilarMovieList] = useState([]);
@@ -15,11 +17,17 @@ function SearchPage(props) {
   const [nPages, setNPages] = useState(1);
   const [fetchedDataComplete, setFetchedDataComplete] = useState(false);
 
+  const { movieByTitleList, setMovieByTitleList } = useBoxOfficeContext();
+
   //hook effect, loads everytime there is a rebuild
 
   const hook = () => {
     setFetchedDataComplete(false);
-    BoxOfficeService.getMovieByTitle(movie).then((list) => {
+    BoxOfficeService.getMovieByTitle(
+      movie,
+      movieByTitleList,
+      setMovieByTitleList
+    ).then((list) => {
       setSimilarMovieList(list);
       setFetchedDataComplete(true);
     });

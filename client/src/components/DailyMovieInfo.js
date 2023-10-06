@@ -5,8 +5,11 @@ import Image from "react-bootstrap/Image";
 
 import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
-
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
 function DailyMovieInfo(props) {
+  const { dailyBoxOfficeMovieList, setDailyBoxOfficeMovieList } =
+    useBoxOfficeContext();
+
   const { movieID } = props;
 
   const [dailyList, setDailyList] = useState([]);
@@ -20,8 +23,15 @@ function DailyMovieInfo(props) {
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
     setFetchedDataComplete(false);
-    BoxOfficeService.getMovieDailyBoxOfficeList(movieID).then(async (list) => {
-      setDailyList(list);
+    BoxOfficeService.getMovieDailyBoxOfficeList(
+      movieID,
+      dailyBoxOfficeMovieList,
+      setDailyBoxOfficeMovieList
+    ).then(async (list) => {
+      const sortedList = list.sort(function (a, b) {
+        return new Date(a.giorno) - new Date(b.giorno);
+      });
+      setDailyList(sortedList);
     });
   };
 

@@ -4,15 +4,21 @@ import Table from "react-bootstrap/Table";
 
 import "./BoxofficeList.css";
 import TableMovie from "./TableMovie";
-
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
 function WeekendMovieInfo(props) {
+  const { weekendBoxOfficeMovieList, setWeekendBoxOfficeMovieList } =
+    useBoxOfficeContext();
   let incassoPrecedente = 1;
   const { movieID } = props;
   const [weekendList, setWeekendList] = useState([]);
 
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    BoxOfficeService.getMovieWeekendBoxOfficeList(movieID).then((list) => {
+    BoxOfficeService.getMovieWeekendBoxOfficeList(
+      movieID,
+      weekendBoxOfficeMovieList,
+      setWeekendBoxOfficeMovieList
+    ).then((list) => {
       setWeekendList(list);
       //console.log(list)
     });

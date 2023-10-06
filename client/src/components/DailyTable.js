@@ -6,10 +6,14 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-date-picker";
 
+import { useBoxOfficeContext } from "../services/BoxOfficeContext";
+
 import TableMovie from "./TableMovie";
 import "./BoxofficeList.css";
 
 function Dailyboxoffice(props) {
+  const { dailyBoxOfficeList, setDailyBoxOfficeList } = useBoxOfficeContext();
+
   let date;
   let stateDate = props.location.state;
 
@@ -42,9 +46,16 @@ function Dailyboxoffice(props) {
 
   //hook effect, loads everytime there is a rebuild
   const hook = () => {
-    BoxOfficeService.getDailyBoxOfficeList(day).then(async (list) => {
-      setDailyList(list);
-
+    BoxOfficeService.getDailyBoxOfficeList(
+      day,
+      dailyBoxOfficeList,
+      setDailyBoxOfficeList
+    ).then(async (list) => {
+      setDailyList(
+        list.sort((a, b) =>
+          a.posizioneClassifica > b.posizioneClassifica ? 1 : -1
+        )
+      );
       setFetchedDataComplete(true);
     });
   };

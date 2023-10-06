@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
-import Jumbotron from "react-bootstrap/Jumbotron";
+import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
 import { useHistory } from "react-router-dom";
 import "./Navbar.css";
@@ -22,7 +22,6 @@ function MyNavbar(props) {
   const [movieToSearch, setMovieToSearch] = useState("");
   const [randomImage, setRandomImage] = useState("");
   const history = useHistory();
-  //console.log(window.location.pathname)
 
   useEffect(() => {
     //background style
@@ -61,28 +60,26 @@ function MyNavbar(props) {
         </Jumbotron>
       )} */}
       <Navbar bg="primary" variant="dark" className="AllNavBar" expand="sm">
-        <Navbar.Brand href="/" className="navHome">
-          <Image src="/assets/home_icon_black.svg" />
+        <Navbar.Brand className="navHome">
+          <Link to="/" style={{ text: "white" }} className="navHome">
+            <Image src="/assets/home_icon_black.svg" />
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav
-            className="mr-auto"
-            activeKey={location.pathname}
-            //onSelect={(selectedKey) => console.log(selectedKey)}
-          >
-            <Nav.Link href="/daily" className="navText">
+          <Nav className="mr-auto" activeKey={location.pathname}>
+            <Link to="/daily" style={{ text: "white" }} className="navText">
               Daily{" "}
-            </Nav.Link>
-            <Nav.Link href="/weekly" className="navText">
+            </Link>
+            <Link to="/weekly" className="navText">
               Weekend{" "}
-            </Nav.Link>
-            <Nav.Link href="/yearly" className="navText">
+            </Link>
+            <Link to="/yearly" className="navText">
               Yearly
-            </Nav.Link>
-            <Nav.Link href="/all-time" className="navText">
+            </Link>
+            <Link to="/all-time" className="navText">
               All Time
-            </Nav.Link>
+            </Link>
           </Nav>
           <Form
             inline

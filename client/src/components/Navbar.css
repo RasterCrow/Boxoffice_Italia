@@ -63,6 +63,12 @@
 }
 .navText {
   font-size: 1em;
+  color:white ;
+  padding:0.5rem;
+}
+.navText:hover {
+  color:rgb(212, 208, 208);
+  text-decoration: none;
 }
 .navHome {
   width: 30px;
