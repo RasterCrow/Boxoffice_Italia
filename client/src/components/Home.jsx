@@ -14,7 +14,7 @@ function CarouselMovies() {
             <Carousel.Item>
                 <img
                     onClick={(event) => history.push(`/movie/5f475a0ed5323f0008d2ae63`)}
-                    className="carouselImage d-block "
+                    className="carouselImage  "
                     src="https://image.tmdb.org/t/p/w500/w93KBwtAyLRHSwPApC9ojVbblz3.jpg"
                     alt="Tenet slide"
                     style={{ cursor: "pointer" }}
@@ -23,7 +23,7 @@ function CarouselMovies() {
             <Carousel.Item>
                 <img
                     onClick={(event) => history.push(`/movie/5f1c12bf6e1da74428c042c1`)}
-                    className="carouselImage d-block "
+                    className="carouselImage "
                     src="https://image.tmdb.org/t/p/w500/y1AthYH1r2j4N4cYn2HdrEGgrnJ.jpg"
                     alt="Joker slide"
                     style={{ cursor: "pointer" }}
@@ -33,7 +33,7 @@ function CarouselMovies() {
                 <img
 
                     onClick={(event) => history.push(`/movie/5f1c12c36e1da74428c04315`)}
-                    className="carouselImage d-block "
+                    className="carouselImage "
                     src="https://image.tmdb.org/t/p/w500/nYLhpz6iASM06q1i4C1QoUNGDk8.jpg"
                     alt="Jojo Rabbit slide"
                     style={{ cursor: "pointer" }}
@@ -51,7 +51,7 @@ function Home() {
 
     return (
         <>
-            <Row style={{ maxHeight: "100%", Height: "100%", marginRight: "0px" }}>
+            <Row style={{ maxHeight: "100%", height: "100%", marginRight: "0px" }}>
                 {/* Famous movies */}
                 <Col sm={4} style={{ paddingRight: "0px" }} >
                     <CarouselMovies />

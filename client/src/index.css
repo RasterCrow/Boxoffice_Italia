@@ -15,6 +15,7 @@ body {
 #root {
   background-color: rgb(27, 26, 26);
   color: white;
+  height:100vh;
 }
 
 code {
