@@ -5,7 +5,9 @@
 
 Codice sorgente di BoxOffice Italia, WebApp che ho sviluppato per facilitare la visione degli incassi al botthegino dei film in uscita nei cinema italiani.
 
-La WebApp è stata creata per uso privato, ma sto lavorando a una demo pubblica.
+La WebApp è stata creata per uso privato, ma è disponibile una demo pubblica [qui](https://boxoffice-demo-37179.web.app/).
+
+UPDATE 2023 : L'app è stata una dei miei primi big progetti. Dovendo modificare alcune cose ora dopo anni mi rendo conto di quanto il codice sia incasinato e quanto js senza type sia problematico da toccare. Siete stati avvisati!
 
 # Struttura
 Il lato client di BoxOffice Italia è stato svilupatto in React Framework, hostato su Firebase Hosting.
@@ -25,9 +27,7 @@ La maggior parte dei siti in italia tengono conto soltanto delle ultime due sett
 
 Inizialmente avevo una versione più basilare sviluppata in PHP e hostata su con Apache sul mio Raspberry. Volevo migliorare però le mie skill da WebDev ho deciso di creare una versione più aggiornata e moderna a livello di tecnologie.
 
-Per il momento è disponibile solo per uso mio privato.
-
-Presto renderò disponibile una versione demo.
+La versione completa é per il momento è disponibile solo per uso mio privato.
 
 # Funzionalità
 <p align="center">
