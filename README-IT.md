@@ -5,7 +5,7 @@
 
 Codice sorgente di BoxOffice Italia, WebApp che ho sviluppato per facilitare la visione degli incassi al botthegino dei film in uscita nei cinema italiani.
 
-La WebApp è stata creata per uso privato, ma è disponibile una demo pubblica [qui](https://boxoffice-demo-37179.web.app/).
+La WebApp è stata creata per uso privato, ma è disponibile una demo pubblica [qui]([https://boxoffice-demo-37179.web.app/](https://boxoffice-demo.rastercrow.me/)).
 
 UPDATE 2023 : L'app è stata una dei miei primi big progetti. Dovendo modificare alcune cose ora dopo anni mi rendo conto di quanto il codice sia incasinato e quanto js senza type sia problematico da toccare. Siete stati avvisati!
 
