@@ -7,7 +7,7 @@ Source code of BoxOffice Italia, WebApp that I developed to make make it eassier
 
 The Webapp was made for private use only, but i'm working on a demo version.
 
-The Webapp was made for private use only, but there is a public demo available [here](https://boxoffice-demo-37179.web.app/).
+The Webapp was made for private use only, but there is a public demo available [here]([https://boxoffice-demo-37179.web.app/](https://boxoffice-demo.rastercrow.me/)).
 
 UPDATE 2023 : This app was one of my first big projects. Trying to change something now, after years, I realize how much spaghetti code and bad practices I used. You've been warned! 
 # Structure
